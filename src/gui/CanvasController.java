@@ -1,7 +1,9 @@
 package gui;
 
 import java.awt.Canvas;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
 
 public class CanvasController {
 
@@ -37,6 +39,19 @@ public class CanvasController {
 			width = newWidth;
 		else
 			width = 0;
+	}
+
+	public static Graphics getGraphics() {
+		return getCanvas().getGraphics();
+	}
+
+	public static void cleanFrame() {
+		getCanvas().setBackground(new Color(255, 255, 255));
+		//getGraphics().clearRect(0, 0, width, height);
+	}
+
+	public static void setColor(int r, int g, int b) {
+		getGraphics().setColor(new Color(r, g, b));
 	}
 
 }
