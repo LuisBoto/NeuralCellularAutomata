@@ -5,38 +5,38 @@ import java.awt.Dimension;
 
 public class CanvasController {
 
-	private Canvas canvas;
-	private int height;
-	private int width;
+	private static Canvas canvas;
+	private static int height;
+	private static int width;
 
-	public CanvasController(int width, int height) {
-		this.setHeight(height);
-		this.setWidth(width);
+	public CanvasController() {
 	}
 
-	protected void createCanvas() {
-		this.canvas = new Canvas();
-		canvas.setSize(new Dimension(500, 500));
+	protected static void createCanvas(int width, int height) {
+		canvas = new Canvas();
+		setHeight(height);
+		setWidth(width);
+		canvas.setSize(new Dimension(width, height));
 	}
 
-	protected Canvas getCanvas() {
+	public static Canvas getCanvas() {
 		if (canvas == null)
-			this.createCanvas();
-		return this.canvas;
+			createCanvas(width, height);
+		return canvas;
 	}
 
-	private void setHeight(int newHeight) {
+	private static void setHeight(int newHeight) {
 		if (newHeight > 0)
-			this.height = newHeight;
+			height = newHeight;
 		else
-			this.height = 0;
+			height = 0;
 	}
 
-	private void setWidth(int newWidth) {
+	private static void setWidth(int newWidth) {
 		if (newWidth > 0)
-			this.width = newWidth;
+			width = newWidth;
 		else
-			this.width = 0;
+			width = 0;
 	}
 
 }
