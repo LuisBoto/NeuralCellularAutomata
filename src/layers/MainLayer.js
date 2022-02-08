@@ -12,7 +12,7 @@ class MainLayer extends Layer {
     }
 
     update() {
-        this.populateParticleArray();
+        this.updateParticles();
     }
 
     draw() {
@@ -20,10 +20,14 @@ class MainLayer extends Layer {
         this.drawParticles();
     }
 
+    updateParticles() {
+        for (var i=0; i<this.particles.length; i++)
+            this.particles[i].update();
+    }
+
     drawParticles() {
-        for (var i=0; i<this.particles.length; i++) {
+        for (var i=0; i<this.particles.length; i++)
             this.particles[i].draw();
-        }
     }
 
     populateParticleArray() {
@@ -34,6 +38,7 @@ class MainLayer extends Layer {
                     2.5,
                     Math.random()*canvasWidth,
                     Math.random()*canvasHeight,
+                    0,
                     0,
                     0,
                     0))
