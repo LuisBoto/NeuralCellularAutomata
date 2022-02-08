@@ -12,20 +12,12 @@ class MainLayer extends Layer {
     }
 
     update() {
-        this.updateParticles();
+        for (var i=0; i<this.particles.length; i++)
+            this.particles[i].update(this.particles);
     }
 
     draw() {
         this.background.draw();
-        this.drawParticles();
-    }
-
-    updateParticles() {
-        for (var i=0; i<this.particles.length; i++)
-            this.particles[i].update();
-    }
-
-    drawParticles() {
         for (var i=0; i<this.particles.length; i++)
             this.particles[i].draw();
     }
@@ -38,10 +30,10 @@ class MainLayer extends Layer {
                     2.5,
                     Math.random()*canvasWidth,
                     Math.random()*canvasHeight,
-                    6,
+                    4,
                     180,
                     17,
-                    5))
+                    15))
         }
     }
 

@@ -6,11 +6,11 @@ var canvasWidth = 1920;
 var canvasHeight = 1080;
 
 var layer;
-var populationSize = 100;
+var populationSize = 1000;
 
 function startGame() {
     layer = new MainLayer();
-    setInterval(loop, 1000 / 30);
+    setInterval(loop, 1000 / 60);
 }
 
 function loop(){

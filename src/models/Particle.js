@@ -12,18 +12,18 @@ class Particle {
         this.orientation = 0;
     }
 
-    update() {
+    update(particleArray) {
+        this.findNeighbors(particleArray);
+        this.categorizeNeighborsBySide();
         this.updateOrientation();
-        var sign = 1;
-        if (Math.random() > 0.5)
-            sign = -1;
-        let angleMovement = degreesToRadians(this.orientation) * sign;
+
+        let angleMovement = degreesToRadians(this.orientation);
         this.x += this.speed*Math.cos(angleMovement);
         this.y += this.speed*Math.sin(angleMovement);
         this.checkBoundaries();
     }
 
-    draw(){
+    draw() {
         context.beginPath();
         context.arc(this.x, this.y, this.particleRadius, 0, 2*Math.PI)
         context.lineWidth = 3;
@@ -31,7 +31,34 @@ class Particle {
     }
 
     updateOrientation() {
-        this.orientation += this.turningAngle + this.neighborhoodAngle*3;
+        this.orientation += this.turningAngle +
+            this.neighborhoodAngle * this.neighbors.length *
+            Math.sign(this.rightNeighbors-this.leftNeighbors);
+    }
+
+    findNeighbors(particleArray) {
+        this.neighbors = [];
+        let distance;
+        for (let i = 0; i < particleArray.length; i++) {
+            distance = Math.sqrt(
+                Math.pow(particleArray[i].x - this.x,2)
+                + Math.pow(particleArray[i].y - this.y,2));
+            if (distance <= this.neighborRadius)
+                this.neighbors.push(particleArray[i]);
+        }
+    }
+
+    categorizeNeighborsBySide() {
+        this.leftNeighbors = 0, this.rightNeighbors = 0;
+        let m = this.speed * Math.sin(degreesToRadians(this.orientation));
+        let dividingLine = (x) => m*(x-this.x) - this.y;
+
+        for (let i = 0; i < this.neighbors.length; i++) {
+            if (this.neighbors[i].y < dividingLine(this.neighbors[i].x))
+                this.leftNeighbors++;
+            else
+                this.rightNeighbors++;
+        }
     }
 
     checkBoundaries() {
