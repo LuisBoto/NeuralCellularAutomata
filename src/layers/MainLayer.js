@@ -38,10 +38,10 @@ class MainLayer extends Layer {
                     2.5,
                     Math.random()*canvasWidth,
                     Math.random()*canvasHeight,
-                    0,
-                    0,
-                    0,
-                    0))
+                    6,
+                    180,
+                    17,
+                    5))
         }
     }
 

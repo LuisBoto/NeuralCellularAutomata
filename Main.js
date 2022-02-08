@@ -31,3 +31,7 @@ function resize() {
 
     context.scale(minimumResize, minimumResize);
 }
+
+function degreesToRadians(degrees) {
+    return degrees * (Math.PI/180);
+}
