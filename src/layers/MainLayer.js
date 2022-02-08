@@ -27,13 +27,13 @@ class MainLayer extends Layer {
         for (var i = 0; i<populationSize; i++) {
             this.particles.push(
                 new Particle(
-                    2.5,
+                    5,
                     Math.random()*canvasWidth,
                     Math.random()*canvasHeight,
-                    4,
+                    6.7,
                     180,
                     17,
-                    15))
+                    5))
         }
     }
 

@@ -26,8 +26,10 @@ class Particle {
     draw() {
         context.beginPath();
         context.arc(this.x, this.y, this.particleRadius, 0, 2*Math.PI)
-        context.lineWidth = 3;
+        context.lineWidth = 2;
         context.stroke();
+        context.fillStyle = getColorForNeighborhoodSize(this.neighbors.length);
+        context.fill();
     }
 
     updateOrientation() {

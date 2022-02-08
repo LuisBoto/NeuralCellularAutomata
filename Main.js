@@ -10,7 +10,7 @@ var populationSize = 1000;
 
 function startGame() {
     layer = new MainLayer();
-    setInterval(loop, 1000 / 60);
+    setInterval(loop, 1000 / 30);
 }
 
 function loop(){
@@ -30,8 +30,4 @@ function resize() {
     canvas.height = canvas.height*minimumResize;
 
     context.scale(minimumResize, minimumResize);
-}
-
-function degreesToRadians(degrees) {
-    return degrees * (Math.PI/180);
 }
