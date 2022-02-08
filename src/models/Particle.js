@@ -42,6 +42,8 @@ class Particle {
         this.neighbors = [];
         let distance;
         for (let i = 0; i < particleArray.length; i++) {
+            if (particleArray[i] === this)
+                continue;
             distance = Math.sqrt(
                 Math.pow(particleArray[i].x - this.x,2)
                 + Math.pow(particleArray[i].y - this.y,2));

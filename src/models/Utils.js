@@ -3,5 +3,5 @@ function degreesToRadians(degrees) {
 }
 
 function getColorForNeighborhoodSize(size) {
-    return ["green", "yellow", "pink", "blue", "red"][size];
+    return ["green", "yellow", "pink", "blue", "red", "cyan", "magenta", "black"][size];
 }

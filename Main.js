@@ -6,7 +6,6 @@ var canvasWidth = 1920;
 var canvasHeight = 1080;
 
 var layer;
-var populationSize = 1000;
 
 function startGame() {
     layer = new MainLayer();

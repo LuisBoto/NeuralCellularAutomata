@@ -24,16 +24,17 @@ class MainLayer extends Layer {
 
     populateParticleArray() {
         this.particles = [];
+        var populationSize = 100;
         for (var i = 0; i<populationSize; i++) {
             this.particles.push(
                 new Particle(
-                    5,
+                    4,
                     Math.random()*canvasWidth,
                     Math.random()*canvasHeight,
-                    6.7,
+                    5,
                     180,
                     17,
-                    5))
+                    15))
         }
     }
 
