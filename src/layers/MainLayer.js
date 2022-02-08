@@ -8,15 +8,36 @@ class MainLayer extends Layer {
 
     initiate() {
         this.background = new Model(images.background, 1920*0.5, 1080*0.5);
-
+        this.populateParticleArray();
     }
 
     update() {
-
+        this.populateParticleArray();
     }
 
     draw() {
         this.background.draw();
+        this.drawParticles();
+    }
+
+    drawParticles() {
+        for (var i=0; i<this.particles.length; i++) {
+            this.particles[i].draw();
+        }
+    }
+
+    populateParticleArray() {
+        this.particles = [];
+        for (var i = 0; i<populationSize; i++) {
+            this.particles.push(
+                new Particle(
+                    2.5,
+                    Math.random()*canvasWidth,
+                    Math.random()*canvasHeight,
+                    0,
+                    0,
+                    0))
+        }
     }
 
 }
