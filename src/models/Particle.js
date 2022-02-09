@@ -30,13 +30,19 @@ class Particle {
         context.stroke();
         context.fillStyle = getColorForNeighborhoodSize(this.neighbors.length);
         context.fill();
+        context.closePath();
+        context.beginPath();
+        context.arc(this.x, this.y, this.particleRadius, degreesToRadians(this.orientation-90), degreesToRadians(this.orientation+90));
+        context.fillStyle = "white";
+        context.fill();
+        context.closePath();
     }
 
     updateOrientation() {
         this.orientation += this.turningAngle +
             this.neighborhoodAngle * this.neighbors.length *
             Math.sign(this.rightNeighbors-this.leftNeighbors);
-            //console.log("RIGHT "+this.rightNeighbors+" LEFT "+this.leftNeighbors + " SIGN "+Math.sign(this.rightNeighbors-this.leftNeighbors));
+            console.log("RIGHT "+this.rightNeighbors+" LEFT "+this.leftNeighbors + " SIGN "+Math.sign(this.rightNeighbors-this.leftNeighbors));
     }
 
     findNeighbors(particleArray) {
