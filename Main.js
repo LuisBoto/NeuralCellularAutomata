@@ -8,7 +8,7 @@ let canvasHeight = 1080;
 let layer;
 
 function startGame() {
-    layer = new MainLayer();
+    layer = new TestLayer();
     setInterval(loop, 1000 / 30);
 }
 

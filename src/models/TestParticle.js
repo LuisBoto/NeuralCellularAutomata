@@ -1,4 +1,4 @@
-class Particle {
+class TestParticle {
 
     constructor(particleRadius, x, y, speed, turningAngle, neighborhoodAngle, neighborRadius) {
         this.particleRadius = particleRadius;
@@ -18,9 +18,6 @@ class Particle {
         this.categorizeNeighborsBySide();
         this.updateOrientation();
 
-        let angleMovement = degreesToRadians(this.orientation);
-        this.x += this.speed*Math.cos(angleMovement);
-        this.y += this.speed*Math.sin(angleMovement);
         this.checkBoundaries();
     }
 
@@ -37,13 +34,31 @@ class Particle {
         context.fillStyle = "white";
         context.fill();
         context.closePath();
+
+        context.beginPath();
+        let angleMovement = degreesToRadians(this.orientation);
+        let x2 = this.x + this.speed*Math.cos(angleMovement);
+        let y2 = this.y + this.speed*Math.sin(angleMovement);
+        //let m = (y2-this.y)/(x2-this.x);
+        let dividingLine = (x) => ((x-this.x)/(x2-this.x))*(y2-this.y) + this.y
+        for (let x=0; x<canvasWidth; x++){
+            context.moveTo(x, dividingLine(x));
+            context.lineTo(x+1, dividingLine(x+1));
+            context.stroke();
+        }
+        context.closePath();
+        context.font = "19px Georgia";
+        context.fillStyle = "black";
+        context.lineWidth = 8;
+        context.textAlign = "center";
+        context.fillText("LEFT: "+this.leftNeighbors, canvasWidth*0.1,canvasHeight*0.5);
+        context.fillText("RIGHT: "+this.rightNeighbors, canvasWidth*0.9,canvasHeight*0.5);
+
+        context.fillText("ANGLE: "+this.orientation+"º", canvasWidth*0.9,canvasHeight*0.6);
     }
 
     updateOrientation() {
-        this.orientation += this.turningAngle +
-            this.neighborhoodAngle * this.neighbors.length *
-            Math.sign(this.rightNeighbors-this.leftNeighbors);
-        //console.log("RIGHT "+this.rightNeighbors+" LEFT "+this.leftNeighbors + " SIGN "+Math.sign(this.rightNeighbors-this.leftNeighbors));
+        this.orientation += 10;
     }
 
     findNeighbors(particleArray) {
@@ -65,7 +80,8 @@ class Particle {
         let angleMovement = degreesToRadians(this.orientation);
         let x2 = this.x + this.speed*Math.cos(angleMovement);
         let y2 = this.y + this.speed*Math.sin(angleMovement);
-        let dividingLine = (x) => ((x-this.x)/(x2-this.x))*(y2-this.y) + this.y;
+
+        let dividingLine = (x) => ((x-this.x)/(x2-this.x))*(y2-this.y) + this.y
         let condition = (neighborY, neighborX) => {
             if (this.orientation < 90 || this.orientation > 270) return neighborY < dividingLine(neighborX);
             else return neighborY > dividingLine(neighborX);

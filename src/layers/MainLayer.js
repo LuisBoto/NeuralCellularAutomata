@@ -23,7 +23,7 @@ class MainLayer extends Layer {
 
     populateParticleArray() {
         this.particles = [];
-        let populationSize = 500;
+        let populationSize = 1000;
         for (let i = 0; i<populationSize; i++) {
             this.particles.push(
                 new Particle(
