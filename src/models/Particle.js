@@ -65,10 +65,12 @@ class Particle {
         let angleMovement = degreesToRadians(this.orientation);
         let x2 = this.x + this.speed*Math.cos(angleMovement);
         let y2 = this.y + this.speed*Math.sin(angleMovement);
-        let dividingLine = (x) => ((x-this.x)/(x2-this.x))*(y2-this.y) + this.y;
+
+        let dividingLine = (x) => ((x-this.x)/(x2-this.x))*(y2-this.y) + this.y
         let condition = (neighborY, neighborX) => {
-            if (this.orientation < 90 || this.orientation > 270) return neighborY < dividingLine(neighborX);
-            else return neighborY > dividingLine(neighborX);
+            if (this.orientation < 90 || this.orientation > 270)
+                return neighborY < dividingLine(neighborX);
+            return neighborY > dividingLine(neighborX);
         }
         for (let i = 0; i < this.neighbors.length; i++) {
             if (condition(this.neighbors[i].y, this.neighbors[i].x))
@@ -82,12 +84,12 @@ class Particle {
         if (this.orientation > 360)
             this.orientation = this.orientation%360;
         if (this.x > canvasWidth)
-            this.x -= canvasWidth;
-        if (this.x < 0)
             this.x = canvasWidth;
+        if (this.x < 0)
+            this.x = 0;
         if (this.y > canvasHeight)
-            this.y -= canvasHeight
+            this.y = canvasHeight
         if (this.y < 0)
-            this.y = canvasHeight;
+            this.y = 0;
     }
 }

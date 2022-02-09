@@ -2,13 +2,13 @@
 let canvas = document.getElementById("canvas");
 let context = canvas.getContext("2d");
 let minimumResize = 1;
-let canvasWidth = 1920;
-let canvasHeight = 1080;
+let canvasWidth = 800;
+let canvasHeight = 600;
 
 let layer;
 
 function startGame() {
-    layer = new TestLayer();
+    layer = new MainLayer();
     setInterval(loop, 1000 / 30);
 }
 
