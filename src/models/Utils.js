@@ -3,18 +3,11 @@ function degreesToRadians(degrees) {
 }
 
 function getColorForNeighborhoodSize(size) {
-    switch(size) {
-        case 0:
-            return "green";
-        case 1:
-        case 2:
-        case 3:
-            return "yellow";
-        case 4:
-        case 5:
-        case 6:
-            return "pink";
-        default:
-            return ["green", "yellow", "pink", "blue", "red", "black"][size%6];
-    }
+    if (size < 10)
+        return "green";
+    if (size < 30)
+        return "yellow";
+    if (size < 50)
+        return "blue";
+    return "red";
 }
