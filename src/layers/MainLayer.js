@@ -3,7 +3,6 @@ class MainLayer extends Layer {
     constructor() {
         super();
         this.initiate();
-        this.monthChange = false;
     }
 
     initiate() {
@@ -12,29 +11,29 @@ class MainLayer extends Layer {
     }
 
     update() {
-        for (var i=0; i<this.particles.length; i++)
+        for (let i=0; i<this.particles.length; i++)
             this.particles[i].update(this.particles);
     }
 
     draw() {
         this.background.draw();
-        for (var i=0; i<this.particles.length; i++)
+        for (let i=0; i<this.particles.length; i++)
             this.particles[i].draw();
     }
 
     populateParticleArray() {
         this.particles = [];
-        var populationSize = 50;
-        for (var i = 0; i<populationSize; i++) {
+        let populationSize = 500;
+        for (let i = 0; i<populationSize; i++) {
             this.particles.push(
                 new Particle(
                     4,
                     Math.random()*canvasWidth,
                     Math.random()*canvasHeight,
-                    4,
-                    -159,
-                    15,
-                    40))
+                    5,
+                    180,
+                    17,
+                    25))
         }
     }
 

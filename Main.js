@@ -1,11 +1,11 @@
 // Canvas & context
-var canvas = document.getElementById("canvas");
-var context = canvas.getContext("2d");
-var minimumResize = 1;
-var canvasWidth = 1920;
-var canvasHeight = 1080;
+let canvas = document.getElementById("canvas");
+let context = canvas.getContext("2d");
+let minimumResize = 1;
+let canvasWidth = 1920;
+let canvasHeight = 1080;
 
-var layer;
+let layer;
 
 function startGame() {
     layer = new MainLayer();
@@ -21,8 +21,8 @@ function loop(){
 window.addEventListener('load', resize, false);
 function resize() {
     console.log("Resize")
-    var resizeWidth = parseFloat(window.innerWidth / canvas.width);
-    var resizeHeight = parseFloat(window.innerHeight / canvas.height);
+    let resizeWidth = parseFloat(window.innerWidth / canvas.width);
+    let resizeHeight = parseFloat(window.innerHeight / canvas.height);
 
     minimumResize = Math.min(resizeWidth, resizeHeight);
     canvas.width = canvas.width*minimumResize;
