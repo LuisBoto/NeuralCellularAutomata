@@ -36,6 +36,7 @@ class Particle {
         this.orientation += this.turningAngle +
             this.neighborhoodAngle * this.neighbors.length *
             Math.sign(this.rightNeighbors-this.leftNeighbors);
+            //console.log("RIGHT "+this.rightNeighbors+" LEFT "+this.leftNeighbors + " SIGN "+Math.sign(this.rightNeighbors-this.leftNeighbors));
     }
 
     findNeighbors(particleArray) {
@@ -54,7 +55,7 @@ class Particle {
 
     categorizeNeighborsBySide() {
         this.leftNeighbors = 0, this.rightNeighbors = 0;
-        let m = this.speed * Math.sin(degreesToRadians(this.orientation));
+        let m = Math.tan(degreesToRadians(this.orientation));
         let dividingLine = (x) => m*(x-this.x) - this.y;
 
         for (let i = 0; i < this.neighbors.length; i++) {
@@ -66,8 +67,8 @@ class Particle {
     }
 
     checkBoundaries() {
-        if (this.orientation >= 360)
-            this.orientation -= 360;
+        if (this.orientation > 360)
+            this.orientation = this.orientation%360;
         if (this.x > canvasWidth)
             this.x -= canvasWidth;
         if (this.x < 0)
