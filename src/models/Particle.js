@@ -10,6 +10,7 @@ class Particle {
         this.neighborRadius = neighborRadius;
 
         this.orientation = 0;
+        this.neighbors = [];
     }
 
     update(particleArray) {
@@ -42,7 +43,7 @@ class Particle {
         this.orientation += this.turningAngle +
             this.neighborhoodAngle * this.neighbors.length *
             Math.sign(this.rightNeighbors-this.leftNeighbors);
-        console.log("RIGHT "+this.rightNeighbors+" LEFT "+this.leftNeighbors + " SIGN "+Math.sign(this.rightNeighbors-this.leftNeighbors));
+        //console.log("RIGHT "+this.rightNeighbors+" LEFT "+this.leftNeighbors + " SIGN "+Math.sign(this.rightNeighbors-this.leftNeighbors));
     }
 
     findNeighbors(particleArray) {
@@ -65,8 +66,7 @@ class Particle {
         let x2 = this.x + this.speed*Math.cos(angleMovement);
         let y2 = this.y + this.speed*Math.sin(angleMovement);
 
-        let m = (y2-this.y)/(x2-this.x);
-        let dividingLine = (x) => m*(x-this.x) - this.y;
+        let dividingLine = (x) => ((x-this.x)/(x2-this.x))*(y2-this.y) + this.y;
 
         for (let i = 0; i < this.neighbors.length; i++) {
             if (this.neighbors[i].y < dividingLine(this.neighbors[i].x))
