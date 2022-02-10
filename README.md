@@ -2,8 +2,9 @@
 Simplistic 2d particle system focused on the emergence of complex patterns from simple rules.
 
 <p align="center">
-    <img src="https://github.com/luisboto/PrimoridalParticleSystem/blob/main/res/particle.gif?raw=true" alt="Particles acting as group"/>
+    <img src="https://raw.githubusercontent.com/LuisBoto/PrimordialParticleSystem/main/res/particle.gif?raw=true" alt="Particles acting as group"/>
 </p>
+
 ## Particle behaviour
 Somewhat similar to the *Game of Life*, particles move and interact within a 2d plain. 
 Each particle moves with a fixed speed and performs a rotation each step, modifying its heading direction 
