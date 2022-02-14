@@ -17,7 +17,7 @@
         body {
             background: #ffffff;
         }
-        #configuration {
+        .configuration {
             display: flex;
             align-items: center;
             justify-content: center;
@@ -29,7 +29,7 @@
 
 <canvas id="canvas" width="1920" height="1080"></canvas>
 <br>
-<div id="configuration">
+<div class="configuration" id="configFields">
     <label for="inputParticleNumber">Particle number:</label>
     <input id="inputParticleNumber" size="5" onchange="updateConfiguration()"/>
 
@@ -45,15 +45,22 @@
     <label for="inputNeighborhoodRadius">Neighborhood radius:</label>
     <input id="inputNeighborhoodRadius" size="4" onchange="updateConfiguration()"/>
 </div>
+<br>
+<div class="configuration" id="presets">
+    <h4 id="presetsTitle">Quick presets:</h4>
+</div>
+<br>
 
 <script src="src/models/Model.js"></script>
     <script src="src/models/Particle.js"></script>
-    <script src="src/models/Utils.js"></script>
 
 <script src="./src/layers/Layer.js"></script>
     <script src="src/layers/MainLayer.js"></script>
 
-<script src="./src/Configuration.js"></script>
+<script src="src/global/Configuration.js"></script>
+<script src="src/global/Presets.js"></script>
+<script src="src/global/Utils.js"></script>
+
 <script src="./src/Res.js"></script>
 <script src="./Main.js"></script>
 

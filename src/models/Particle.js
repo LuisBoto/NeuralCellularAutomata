@@ -83,12 +83,12 @@ class Particle {
         if (this.orientation > 360)
             this.orientation = this.orientation%360;
         if (this.x > canvasWidth)
-            this.x = canvasWidth;
+            this.x = this.x%canvasWidth;
         if (this.x < 0)
-            this.x = 0;
+            this.x = canvasWidth-this.x;
         if (this.y > canvasHeight)
-            this.y = canvasHeight
+            this.y = this.y%canvasHeight
         if (this.y < 0)
-            this.y = 0;
+            this.y = canvasHeight-this.y;
     }
 }

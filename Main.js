@@ -21,8 +21,8 @@ function loop(){
 window.addEventListener('load', resize, false);
 function resize() {
     console.log("Resize")
-    let resizeWidth = parseFloat(window.innerWidth / canvas.width);
-    let resizeHeight = parseFloat(window.innerHeight / canvas.height);
+    let resizeWidth = parseFloat(window.innerWidth*0.89 / canvas.width);
+    let resizeHeight = parseFloat(window.innerHeight*0.89 / canvas.height);
 
     minimumResize = Math.min(resizeWidth, resizeHeight);
     canvas.width = canvas.width*minimumResize;
