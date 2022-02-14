@@ -7,9 +7,9 @@ let canvasHeight = 1080;
 
 let layer;
 
-function startGame() {
+function start() {
     layer = new MainLayer();
-    setInterval(loop, 1000 / 30);
+    startCanvasLoop();
 }
 
 function loop(){

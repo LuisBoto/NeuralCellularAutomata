@@ -7,6 +7,7 @@ class MainLayer extends Layer {
 
     initiate() {
         this.background = new Model(images.background, 1920*0.5, 1080*0.5);
+        this.particles = [];
         this.populateParticleArray();
     }
 
@@ -22,19 +23,34 @@ class MainLayer extends Layer {
     }
 
     populateParticleArray() {
-        this.particles = [];
-        let populationSize = 1000;
-        for (let i = 0; i<populationSize; i++) {
-            this.particles.push(
-                new Particle(
-                    4,
-                    Math.random()*canvasWidth,
-                    Math.random()*canvasHeight,
-                    6,
-                    180,
-                    17,
-                    75))
+        for (let i = 0; i < particleNumber; i++) {
+            this.addNewParticle();
         }
     }
 
+    updateParticleParameters() {
+        for (let i = 0; i < this.particles.length; i++) {
+            this.particles[i].speed = particleSpeed;
+            this.particles[i].turningAngle = particleTurningAngle;
+            this.particles[i].neighborhoodAngle = neighborTurningAngle;
+            this.particles[i].neighborRadius = neighborhoodRadius;
+        }
+        while (this.particles.length < particleNumber)
+            this.addNewParticle();
+        while (this.particles.length > particleNumber)
+            this.particles.pop();
+    }
+
+    addNewParticle() {
+        let particleRadius = 4;
+        this.particles.push(
+            new Particle(
+                particleRadius,
+                Math.random()*canvasWidth,
+                Math.random()*canvasHeight,
+                particleSpeed,
+                particleTurningAngle,
+                neighborTurningAngle,
+                neighborhoodRadius));
+    }
 }

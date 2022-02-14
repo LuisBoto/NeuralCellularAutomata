@@ -5,7 +5,7 @@ class Text {
         this.x = x;
         this.y = y;
         this.center = false;
-        if (x==1920*0.5) {
+        if (x==canvasWidth*0.5) {
             this.center = true;
         }
     }

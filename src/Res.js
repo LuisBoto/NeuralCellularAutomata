@@ -15,7 +15,7 @@ function loadImages(index){
             index++;
             loadImages(index);
         } else {
-            startGame();
+            start();
         }
     }
 }

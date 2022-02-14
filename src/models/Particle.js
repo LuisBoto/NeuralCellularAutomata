@@ -43,7 +43,6 @@ class Particle {
         this.orientation += this.turningAngle +
             this.neighborhoodAngle * this.neighbors.length *
             Math.sign(this.rightNeighbors-this.leftNeighbors);
-        //console.log("RIGHT "+this.rightNeighbors+" LEFT "+this.leftNeighbors + " SIGN "+Math.sign(this.rightNeighbors-this.leftNeighbors));
     }
 
     findNeighbors(particleArray) {

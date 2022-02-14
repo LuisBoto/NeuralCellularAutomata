@@ -17,11 +17,33 @@
         body {
             background: #ffffff;
         }
+        #configuration {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            column-gap: 1%;
+        }
     </style>
 </head>
 <body>
 
 <canvas id="canvas" width="1920" height="1080"></canvas>
+<div id="configuration">
+    <label for="inputParticleNumber">Particle number:</label>
+    <input id="inputParticleNumber" onchange="updateConfiguration()"/>
+
+    <label for="inputSpeed">Particle speed:</label>
+    <input id="inputSpeed" onchange="updateConfiguration()"/>
+
+    <label for="inputTurningAngle">Turning angle (α):</label>
+    <input id="inputTurningAngle" onchange="updateConfiguration()"/>
+
+    <label for="inputNeighborAngle">Neighbor turning angle (β):</label>
+    <input id="inputNeighborAngle" onchange="updateConfiguration()"/>
+
+    <label for="inputNeighborhoodRadius">Neighborhood radius:</label>
+    <input id="inputNeighborhoodRadius" onchange="updateConfiguration()"/>
+</div>
 
 <script src="src/models/Model.js"></script>
     <script src="src/models/Particle.js"></script>
@@ -30,6 +52,7 @@
 <script src="./src/layers/Layer.js"></script>
     <script src="src/layers/MainLayer.js"></script>
 
+<script src="./src/Configuration.js"></script>
 <script src="./src/Res.js"></script>
 <script src="./Main.js"></script>
 
