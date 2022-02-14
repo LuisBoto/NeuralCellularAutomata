@@ -23,9 +23,8 @@ class MainLayer extends Layer {
     }
 
     populateParticleArray() {
-        for (let i = 0; i < particleNumber; i++) {
+        for (let i = 0; i < particleNumber; i++)
             this.addNewParticle();
-        }
     }
 
     updateParticleParameters() {
