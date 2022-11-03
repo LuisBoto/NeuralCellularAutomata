@@ -1,9 +1,9 @@
 class Particle {
 
-    constructor(particleRadius, x, y, speed, turningAngle, neighborhoodAngle, neighborRadius) {
+    constructor(particleRadius, column, row, speed, turningAngle, neighborhoodAngle, neighborRadius) {
         this.particleRadius = particleRadius;
-        this.x = x;
-        this.y = y;
+        this.x = canvasWidth/columnNumber*column;
+        this.y = canvasHeight/rowNumber*row;
         this.speed = speed;
         this.turningAngle = turningAngle;
         this.neighborhoodAngle = neighborhoodAngle;

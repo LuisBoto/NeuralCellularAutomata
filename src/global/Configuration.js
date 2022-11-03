@@ -1,4 +1,4 @@
-let particleNumber = 1000, particleSpeed = 6, particleTurningAngle = 180, neighborTurningAngle = 17, neighborhoodRadius = 75;
+let columnNumber = 100, rowNumber = 70, particleSpeed = 6, particleTurningAngle = 180, neighborTurningAngle = 17, neighborhoodRadius = 75;
 let loopID;
 
 function updateConfiguration() {
@@ -17,6 +17,7 @@ function updateParticlePopulation() {
 }
 
 function updateInputFieldsValues() {
+    let particleNumber = 1000;
     document.getElementById("inputParticleNumber").value = particleNumber;
     document.getElementById("inputSpeed").value = particleSpeed;
     document.getElementById("inputTurningAngle").value = particleTurningAngle;

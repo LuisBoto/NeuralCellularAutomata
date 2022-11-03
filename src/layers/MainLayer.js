@@ -13,40 +13,42 @@ class MainLayer extends Layer {
 
     update() {
         for (let i=0; i<this.particles.length; i++)
-            this.particles[i].update(this.particles);
+            for (let j=0; j<this.particles[i].length; j++)
+                this.particles[i][j].update(this.particles);
     }
 
     draw() {
         this.background.draw();
         for (let i=0; i<this.particles.length; i++)
-            this.particles[i].draw();
+            for (let j=0; j<this.particles[i].length; j++)
+                this.particles[i][j].draw();
     }
 
     populateParticleArray() {
-        for (let i = 0; i < particleNumber; i++)
-            this.addNewParticle();
+        for (let i = 0; i < columnNumber; i++) {
+            this.particles[i] = []
+            for (let j = 0; j < rowNumber; j++)
+                this.addNewParticle(i, j);
+        }
     }
 
     updateParticleParameters() {
-        for (let i = 0; i < this.particles.length; i++) {
-            this.particles[i].speed = particleSpeed;
-            this.particles[i].turningAngle = particleTurningAngle;
-            this.particles[i].neighborhoodAngle = neighborTurningAngle;
-            this.particles[i].neighborRadius = neighborhoodRadius;
+        for (let i = 0; i < this.particles.length; i++) 
+            for (let j=0; j<this.particles[i].length; j++){
+                this.particles[i].speed = particleSpeed;
+                this.particles[i].turningAngle = particleTurningAngle;
+                this.particles[i].neighborhoodAngle = neighborTurningAngle;
+                this.particles[i].neighborRadius = neighborhoodRadius;
         }
-        while (this.particles.length < particleNumber)
-            this.addNewParticle();
-        while (this.particles.length > particleNumber)
-            this.particles.pop();
     }
 
-    addNewParticle() {
+    addNewParticle(column, row) {
         let particleRadius = 4;
-        this.particles.push(
+        this.particles[column].push(
             new Particle(
                 particleRadius,
-                Math.random()*canvasWidth,
-                Math.random()*canvasHeight,
+                column,
+                row,
                 particleSpeed,
                 particleTurningAngle,
                 neighborTurningAngle,
