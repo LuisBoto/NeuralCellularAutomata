@@ -43,15 +43,6 @@ class MainLayer extends Layer {
     }
 
     addNewParticle(column, row) {
-        let particleRadius = 4;
-        this.particles[column].push(
-            new Particle(
-                particleRadius,
-                column,
-                row,
-                particleSpeed,
-                particleTurningAngle,
-                neighborTurningAngle,
-                neighborhoodRadius));
+        this.particles[column].push(new Particle(column, row));
     }
 }
