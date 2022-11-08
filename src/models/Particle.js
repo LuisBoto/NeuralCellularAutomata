@@ -19,7 +19,7 @@ class Particle {
     }
 
     draw() {
-        context.fillStyle = this.state == 1 ? '#000000' : '#ffffff';
+        context.fillStyle = getColorForCellState(this.state);
         context.fillRect(this.x, this.y, canvasWidth/columnNumber, canvasHeight/rowNumber);
     }
 

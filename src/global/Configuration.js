@@ -1,5 +1,5 @@
 let columnNumber = 160, rowNumber = 90;
-let fps = 1;
+let fps = 5;
 let loopID;
 
 function updateConfiguration() {
