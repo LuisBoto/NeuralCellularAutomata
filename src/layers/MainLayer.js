@@ -1,14 +1,12 @@
-class MainLayer extends Layer {
+class MainLayer {
 
     constructor() {
-        super();
         this.initiate();
     }
 
     initiate() {
         this.background = new Background('#ffffff', 1920*0.5, 1080*0.5);
-        this.particles = [];
-        this.populateParticleArray();
+        this.recreateParticleMatrix();
     }
 
     update() {
@@ -32,14 +30,9 @@ class MainLayer extends Layer {
         }
     }
 
-    updateParticleParameters() {
-        for (let i = 0; i < this.particles.length; i++) 
-            for (let j=0; j<this.particles[i].length; j++){
-                this.particles[i].speed = particleSpeed;
-                this.particles[i].turningAngle = particleTurningAngle;
-                this.particles[i].neighborhoodAngle = neighborTurningAngle;
-                this.particles[i].neighborRadius = neighborhoodRadius;
-        }
+    recreateParticleMatrix() {        
+        this.particles = [];
+        this.populateParticleArray();
     }
 
     addNewParticle(column, row) {

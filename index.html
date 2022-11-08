@@ -30,20 +30,11 @@
 <canvas id="canvas" width="1920" height="1080"></canvas>
 <br>
 <div class="configuration" id="configFields">
-    <label for="inputParticleNumber">Particle number:</label>
-    <input id="inputParticleNumber" size="5" onchange="updateConfiguration()"/>
+    <label for="inputColumnNumber">Column number:</label>
+    <input id="inputColumnNumber" size="5" onchange="updateConfiguration()"/>
 
-    <label for="inputSpeed">Particle speed:</label>
-    <input id="inputSpeed" size="4" onchange="updateConfiguration()"/>
-
-    <label for="inputTurningAngle">Turning angle (α):</label>
-    <input id="inputTurningAngle" size="3" onchange="updateConfiguration()"/>
-
-    <label for="inputNeighborAngle">Neighbor turning angle (β):</label>
-    <input id="inputNeighborAngle" size="3" onchange="updateConfiguration()"/>
-
-    <label for="inputNeighborhoodRadius">Neighborhood radius:</label>
-    <input id="inputNeighborhoodRadius" size="4" onchange="updateConfiguration()"/>
+    <label for="inputRowNumber">Row number:</label>
+    <input id="inputRowNumber" size="5" onchange="updateConfiguration()"/>
 </div>
 <br>
 <div class="configuration" id="presets">
@@ -54,8 +45,7 @@
 <script src="src/models/Background.js"></script>
 <script src="src/models/Particle.js"></script>
 
-<script src="./src/layers/Layer.js"></script>
-    <script src="src/layers/MainLayer.js"></script>
+<script src="src/layers/MainLayer.js"></script>
 
 <script src="src/global/Configuration.js"></script>
 <script src="src/global/Presets.js"></script>
