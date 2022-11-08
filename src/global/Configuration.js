@@ -6,12 +6,12 @@ function updateConfiguration() {
     columnNumber = parseInt(document.getElementById("inputColumnNumber").value);
     rowNumber = parseInt(document.getElementById("inputRowNumber").value);
 
-    updateParticlePopulation();
+    updateCellPopulation();
 }
 
-function updateParticlePopulation() {
+function updateCellPopulation() {
     clearInterval(loopID); // Stops loop
-    layer.recreateParticleMatrix();
+    layer.recreateCellMatrix();
     startCanvasLoop();
 }
 

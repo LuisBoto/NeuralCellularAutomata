@@ -6,36 +6,36 @@ class MainLayer {
 
     initiate() {
         this.background = new Background('#ffffff', 1920*0.5, 1080*0.5);
-        this.recreateParticleMatrix();
+        this.recreateCellMatrix();
     }
 
     update() {
-        for (let i=0; i<this.particles.length; i++)
-            for (let j=0; j<this.particles[i].length; j++)
-                this.particles[i][j].update(this.particles);
+        for (let i=0; i<this.cells.length; i++)
+            for (let j=0; j<this.cells[i].length; j++)
+                this.cells[i][j].update(this.cells);
     }
 
     draw() {
         this.background.draw();
-        for (let i=0; i<this.particles.length; i++)
-            for (let j=0; j<this.particles[i].length; j++)
-                this.particles[i][j].draw();
+        for (let i=0; i<this.cells.length; i++)
+            for (let j=0; j<this.cells[i].length; j++)
+                this.cells[i][j].draw();
     }
 
-    populateParticleArray() {
+    populateCellArray() {
         for (let i = 0; i < columnNumber; i++) {
-            this.particles[i] = []
+            this.cells[i] = []
             for (let j = 0; j < rowNumber; j++)
-                this.addNewParticle(i, j);
+                this.addNewCell(i, j);
         }
     }
 
-    recreateParticleMatrix() {        
-        this.particles = [];
-        this.populateParticleArray();
+    recreateCellMatrix() {        
+        this.cells = [];
+        this.populateCellArray();
     }
 
-    addNewParticle(column, row) {
-        this.particles[column].push(new Particle(column, row));
+    addNewCell(column, row) {
+        this.cells[column].push(new Cell(column, row));
     }
 }
