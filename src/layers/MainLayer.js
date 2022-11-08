@@ -6,7 +6,7 @@ class MainLayer extends Layer {
     }
 
     initiate() {
-        this.background = new Model(images.background, 1920*0.5, 1080*0.5);
+        this.background = new Background('#ffffff', 1920*0.5, 1080*0.5);
         this.particles = [];
         this.populateParticleArray();
     }

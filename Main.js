@@ -30,3 +30,5 @@ function resize() {
 
     context.scale(minimumResize, minimumResize);
 }
+
+start();

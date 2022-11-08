@@ -1,11 +1,11 @@
 // Resources to pre-load list
 var cache = [];
 var images = {
-    background : "res/background.png",
+    //background : "res/background.png",
 };
 
 var routeImages = Object.values(images);
-loadImages(0);
+//loadImages(0);
 
 function loadImages(index){
     cache[routeImages[index]] = new Image();
@@ -15,7 +15,7 @@ function loadImages(index){
             index++;
             loadImages(index);
         } else {
-            start();
+            start(); // Start only once resources have been loaded
         }
     }
 }
