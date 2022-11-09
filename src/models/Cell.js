@@ -3,7 +3,7 @@ class Cell {
     constructor(column, row) {
         this.column = column, this.row = row;
         this.calculateCellPositionOnCanvas();
-        this.state = 0;
+        this.state = Math.random();
         this.neighbors = [];
     }
 
@@ -15,7 +15,6 @@ class Cell {
     update(cellMatrix) {
         this.calculateCellPositionOnCanvas();
         this.findNeighbors(cellMatrix);
-        this.state = Math.random() < 0.5 ? 1 : 0;
     }
 
     draw() {
@@ -31,10 +30,16 @@ class Cell {
             neighborCoordinate = currentCoordinate.getNeighborCoordinate(DirectionEnum[direction]);
             this.neighbors.push(cellMatrix[neighborCoordinate.column][neighborCoordinate.row]);
         }
+        let total = 0;
+        for (let neighbor in this.neighbors) {
+                total += this.neighbors[neighbor].state;
+        }
+        
+        this.state = total/6;
     }
 
     getColorForCellState() {
-        let alpha = (this.state*255).toString(16);
+        let alpha = (this.state*255).toString(16).split('.')[0];
         if (alpha.length <= 1) 
         alpha = '0' + alpha;
         return '#000000' + alpha;
