@@ -1,6 +1,6 @@
 // Canvas & context
 let canvas = document.getElementById("canvas");
-let context = canvas.getContext("2d");
+let context = canvas.getContext('2d', { alpha: false });
 let minimumResize = 1;
 let canvasWidth = 1920;
 let canvasHeight = 1080;

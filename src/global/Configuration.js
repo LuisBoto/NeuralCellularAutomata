@@ -1,5 +1,5 @@
-let columnNumber = 160, rowNumber = 90;
-let fps = 5;
+let columnNumber = 320, rowNumber = 180;
+let fps = 15;
 let loopID;
 
 let kernel = [
