@@ -9,12 +9,13 @@ let layer;
 
 function start() {
     layer = new MainLayer();
-    startCanvasLoop();
+    requestAnimationFrame(() => loop());
 }
 
 function loop(){
     layer.update();
     layer.draw();
+    requestAnimationFrame(() => loop());
 }
 
 // Resize

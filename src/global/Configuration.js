@@ -1,5 +1,4 @@
 let columnNumber = 320, rowNumber = 180;
-let fps = 15;
 let loopID;
 
 let kernel = [
@@ -16,18 +15,12 @@ function updateConfiguration() {
 }
 
 function updateCellPopulation() {
-    clearInterval(loopID); // Stops loop
     layer.recreateCellMatrix();
-    startCanvasLoop();
 }
 
 function updateInputFieldsValues() {
     document.getElementById("inputColumnNumber").value = columnNumber;
     document.getElementById("inputRowNumber").value = rowNumber;
-}
-
-function startCanvasLoop() {
-    loopID = setInterval(loop, 1000 / fps);
 }
 
 updateInputFieldsValues();
