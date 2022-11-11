@@ -4,7 +4,7 @@ class Cell {
         this.column = column, this.row = row;
         this.calculateCellPositionOnCanvas();
         this.state = Math.random();
-        this.neighbors = [];
+        //this.neighbors = [];
     }
 
     calculateCellPositionOnCanvas() {
@@ -15,6 +15,7 @@ class Cell {
     update(cellMatrix) {
         this.calculateCellPositionOnCanvas();
         this.findNeighbors(cellMatrix);
+        this.cutState();
     }
 
     draw() {
@@ -23,19 +24,24 @@ class Cell {
     }
 
     findNeighbors(cellMatrix) {
-        this.neighbors = [];
+        //this.neighbors = [];
         let currentCoordinate = new Coordinate(this.column, this.row);
-        let neighborCoordinate;
+        let neighborCoordinate, neighborCell;
+        let totalState = 0;
         for (let direction in DirectionEnum) {
             neighborCoordinate = currentCoordinate.getNeighborCoordinate(DirectionEnum[direction]);
-            this.neighbors.push(cellMatrix[neighborCoordinate.column][neighborCoordinate.row]);
+            neighborCell = cellMatrix[neighborCoordinate.column][neighborCoordinate.row]; 
+            totalState += neighborCell.state * kernel[1+DirectionEnum[direction].row][1+DirectionEnum[direction].column];
+            //this.neighbors.push(cellMatrix[neighborCoordinate.column][neighborCoordinate.row]);
         }
-        let total = 0;
-        for (let neighbor in this.neighbors) {
-                total += this.neighbors[neighbor].state;
-        }
-        
-        this.state = total/6;
+        this.state = totalState + this.state*kernel[1][1];
+    }
+
+    cutState() {
+        if (this.state > 1)
+            this.state = 1;
+        if (this.state < 0)
+            this.state = 0;
     }
 
     getColorForCellState() {
