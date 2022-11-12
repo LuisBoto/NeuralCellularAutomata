@@ -11,7 +11,7 @@ class Cell {
         let totalState = 0;
         for (let neighbor of this.neighbors) {
             //if (neighborCell.state > 0.1)
-            totalState += neighbor.cell.state * kernel[1+neighbor.direction.row][1+neighbor.direction.column];
+            totalState += neighbor.cell.state * neighbor.kernelValue;
         }
         this.state = totalState + this.state*kernel[1][1];      
         this.cutState();
@@ -37,7 +37,7 @@ class Cell {
             neighborCoordinate = currentCoordinate.getNeighborCoordinate(DirectionEnum[direction]);
             neighborCell = cellMatrix[neighborCoordinate.column][neighborCoordinate.row]; 
             this.neighbors.push({
-                direction : DirectionEnum[direction],
+                kernelValue : kernel[1+DirectionEnum[direction].row][1+DirectionEnum[direction].column],
                 cell : neighborCell
             })
         }
