@@ -10,31 +10,39 @@ class MainLayer {
     }
 
     update() {
-        let initialTime = Date.now();
-        let workerNumber =  navigator.hardwareConcurrency;
-        const worker = new Worker('src/layers/UpdateWorker.js');
-        worker.postMessage(this.cells);
-        worker.onmessage = e => {
-            for (let i=0; i<this.cells.length; i++)
-                for (let j=0; j<this.cells[i].length; j++) {
+        let workerNumber = navigator.hardwareConcurrency;
+        
+        let running = 0;
+        for (let n=0; n<workerNumber; n++) {
+            const worker = new Worker('src/layers/UpdateWorker.js');
+            worker.onmessage = workerDone;
+            worker.postMessage(this.cells.slice(columnNumber/workerNumber*n, columnNumber/workerNumber*(n+1)));
+            running++;
+        }
+
+        function workerDone(e) {
+            running--;
+            layer.updateCellStatesFromWorkerResponse(e);
+            if (running==0) {
+                layer.draw();
+                requestAnimationFrame(() => loop());
+            }
+        }
+    }
+
+    updateCellStatesFromWorkerResponse(e) {
+        for (let i=0; i<e.data.length; i++)
+                for (let j=0; j<e.data[i].length; j++) {
                     let cell = e.data[i][j];
                     this.cells[cell.column][cell.row].state = cell.state;
-                }
-        
-        this.draw();
-        console.log("next");
-        requestAnimationFrame(() => loop());
-        };
-        //console.log("ELAPSED ON UPDATE: "+ (Date.now()-initialTime));
+            }
     }
 
     draw() {
-        let initialTime = Date.now();
         this.background.draw();
         for (let i=0; i<this.cells.length; i++)
             for (let j=0; j<this.cells[i].length; j++)
                 this.cells[i][j].draw();
-        //console.log("ELAPSED ON DRAW: "+ (Date.now()-initialTime));
     }
 
     populateCellArray() {

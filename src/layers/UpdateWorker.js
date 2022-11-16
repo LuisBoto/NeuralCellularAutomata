@@ -23,7 +23,6 @@ function processUpdates(cellArray) {
 function update(cell) {
     let totalState = 0;
     for (let neighbor of cell.neighbors) {
-        //if (neighborCell.state > 0.1)
         totalState += neighbor.cell.state * neighbor.kernelValue;
     }
     cell.state = totalState + cell.state*kernel[1][1];      
