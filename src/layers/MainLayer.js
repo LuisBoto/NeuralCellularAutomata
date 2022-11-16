@@ -11,10 +11,21 @@ class MainLayer {
 
     update() {
         let initialTime = Date.now();
-        for (let i=0; i<this.cells.length; i++)
-            for (let j=0; j<this.cells[i].length; j++)
-                this.cells[i][j].update();
-        console.log("ELAPSED ON UPDATE: "+ (Date.now()-initialTime));
+        let workerNumber =  navigator.hardwareConcurrency;
+        const worker = new Worker('src/layers/UpdateWorker.js');
+        worker.postMessage(this.cells);
+        worker.onmessage = e => {
+            for (let i=0; i<this.cells.length; i++)
+                for (let j=0; j<this.cells[i].length; j++) {
+                    let cell = e.data[i][j];
+                    this.cells[cell.column][cell.row].state = cell.state;
+                }
+        
+        this.draw();
+        console.log("next");
+        requestAnimationFrame(() => loop());
+        };
+        //console.log("ELAPSED ON UPDATE: "+ (Date.now()-initialTime));
     }
 
     draw() {
@@ -23,7 +34,7 @@ class MainLayer {
         for (let i=0; i<this.cells.length; i++)
             for (let j=0; j<this.cells[i].length; j++)
                 this.cells[i][j].draw();
-        console.log("ELAPSED ON DRAW: "+ (Date.now()-initialTime));
+        //console.log("ELAPSED ON DRAW: "+ (Date.now()-initialTime));
     }
 
     populateCellArray() {

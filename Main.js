@@ -14,8 +14,7 @@ function start() {
 
 function loop(){
     layer.update();
-    layer.draw();
-    requestAnimationFrame(() => loop());
+    //layer.draw();
 }
 
 // Resize
