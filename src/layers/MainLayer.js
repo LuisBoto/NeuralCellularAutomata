@@ -11,15 +11,13 @@ class MainLayer {
 
     update() {
         let workerNumber = navigator.hardwareConcurrency;
-        
-        let running = 0;
+        /*let running = 0;
         for (let n=0; n<workerNumber; n++) {
             const worker = new Worker('src/layers/UpdateWorker.js');
             worker.onmessage = workerDone;
             worker.postMessage(this.cells.slice(columnNumber/workerNumber*n, columnNumber/workerNumber*(n+1)));
             running++;
         }
-
         function workerDone(e) {
             running--;
             layer.updateCellStatesFromWorkerResponse(e);
@@ -27,7 +25,12 @@ class MainLayer {
                 layer.draw();
                 requestAnimationFrame(() => loop());
             }
-        }
+        }*/
+        for (let i=0; i<this.cells.length; i++)
+            for (let j=0; j<this.cells[i].length; j++)
+                this.cells[i][j].update();
+        this.draw();
+        requestAnimationFrame(() => loop());
     }
 
     updateCellStatesFromWorkerResponse(e) {

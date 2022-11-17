@@ -7,7 +7,6 @@ class Cell {
     }
 
     update() {
-        this.calculateCellPositionOnCanvas();
         let totalState = 0;
         for (let neighbor of this.neighbors) {
             //if (neighborCell.state > 0.1)

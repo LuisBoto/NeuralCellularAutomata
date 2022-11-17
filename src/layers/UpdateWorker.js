@@ -7,9 +7,9 @@ let kernel = [
 self.onmessage = function(e) {
     if(e.data === undefined) 
         return;
-
     let updatedCells = processUpdates(e.data);
     self.postMessage(updatedCells)
+    self.close();
 }
 
 function processUpdates(cellArray) {
