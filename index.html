@@ -1,8 +1,31 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+
+    <title>Neural Cellular Automata</title>
+    <style>
+        * { padding: 0; margin: 0; }
+        canvas {
+            background: #fff;
+            display: block;
+            margin: 0 auto;
+        }
+        body {
+            background: #ffffff;
+        }
+        .configuration {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            column-gap: 1%;
+        }
+    </style>
     <script src="lib/build/distributions/lib.wasm.js"></script>
-  </head>
+</head>
 <body>
   <script>
     WebAssembly.instantiateStreaming(fetch('lib/build/distributions/lib.wasm'), wasmImports)
@@ -12,5 +35,19 @@
       })
       .catch(err => document.write(err));
   </script>
+  <canvas id="canvas" width="1920" height="1080"></canvas>
+  <br>
+  <div class="configuration" id="configFields">
+      <label for="inputColumnNumber">Column number:</label>
+      <input id="inputColumnNumber" size="5" onchange="updateConfiguration()"/>
+  
+      <label for="inputRowNumber">Row number:</label>
+      <input id="inputRowNumber" size="5" onchange="updateConfiguration()"/>
+  </div>
+  <br>
+  <div class="configuration" id="presets">
+      <h4 id="presetsTitle">Quick presets:</h4>
+  </div>
+  <br>
 </body>
 </html>
