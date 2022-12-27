@@ -1,0 +1,2 @@
+rootProject.name = 'NeuralCellularAutomata'
+include('lib')
