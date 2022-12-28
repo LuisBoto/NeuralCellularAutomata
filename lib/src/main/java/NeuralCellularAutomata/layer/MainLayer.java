@@ -2,15 +2,15 @@ package NeuralCellularAutomata.layer;
 
 import NeuralCellularAutomata.model.Cell;
 
-import static NeuralCellularAutomata.global.Configuration.COLUMN_NUMBER;
-import static NeuralCellularAutomata.global.Configuration.ROW_NUMBER;
+import java.awt.image.BufferedImage;
+
+import static NeuralCellularAutomata.global.Configuration.*;
 
 public class MainLayer implements Layer {
 
     private Cell[][] cells;
 
     public MainLayer() {
-        //this.background = new Background('#ffffff', 1920*0.5, 1080*0.5);
         this.recreateCellMatrix();
     }
 
@@ -23,11 +23,12 @@ public class MainLayer implements Layer {
     }
 
     @Override
-    public void draw() {
-        /*this.background.draw();
-        for (let i=0; i<this.cells.length; i++)
-            for (let j=0; j<this.cells[i].length; j++)
-                this.cells[i][j].draw();*/
+    public BufferedImage draw() {
+        BufferedImage frame = new BufferedImage(CANVAS_WIDTH, CANVAS_HEIGHT, BufferedImage.TYPE_INT_RGB);
+        for (int i=0; i<this.cells.length; i++)
+            for (int j=0; j<this.cells[i].length; j++)
+                frame = this.cells[i][j].draw(frame);
+        return frame;
     }
 
     private void populateCellArray() {

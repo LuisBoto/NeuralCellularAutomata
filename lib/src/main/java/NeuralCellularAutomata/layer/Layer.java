@@ -1,6 +1,8 @@
 package NeuralCellularAutomata.layer;
 
+import java.awt.image.BufferedImage;
+
 public interface Layer {
     void update();
-    void draw();
+    BufferedImage draw();
 }
