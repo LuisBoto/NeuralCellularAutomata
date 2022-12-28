@@ -16,9 +16,25 @@ async function loadWasmModule() {
 async function start() {
   await loadWasmModule();
   wasmModule.main();
+  wasmModule.initialize();
+  loop();
 }
 
 start();
+
+function loop() {
+  let framedata = wasmModule.getFrame();
+  framedata = framedata["2"].map(i => i["2"].map(n => n.toString(16)));
+  console.log(framedata);
+
+  framedata.map(i => i.map(j => {
+    context.fillStyle = j;
+    context.fillRect(1,  1, Math.floor(canvasWidth/320), Math.floor(canvasHeight/180));
+
+  }))
+
+  //requestAnimationFrame(() => loop())
+}
 
 // Resize
 window.addEventListener('load', resize, false);

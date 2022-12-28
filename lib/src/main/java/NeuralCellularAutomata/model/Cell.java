@@ -29,7 +29,7 @@ public class Cell {
     }
 
     public int[][] draw(int[][] frame) {
-        frame[this.column][this.row] = 0xffffff00 | (this.getColorForCellState() >> 24);
+        frame[this.column][this.row] = 0xff5733; //0xffffff00 | (this.getColorForCellState() >> 24);
         return frame;
     }
 
