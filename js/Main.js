@@ -23,17 +23,28 @@ async function start() {
 start();
 
 function loop() {
+  let wasmtime = Date.now();
   let framedata = wasmModule.getFrame();
-  framedata = framedata["2"].map(i => i["2"].map(n => n.toString(16)));
-  console.log(framedata);
+  console.log("Frame wasm time "+ (Date.now() - wasmtime));
+  let jstime = Date.now();
+  framedata = framedata["2"].map(i => i["2"].map(n => {
+    n = n.toString(16);
+    if (n.lenght <= 1) n= '#0000000' + n 
+    else n= "#000000"+n;
+    return n;
+  }));
+  //console.log(framedata);
 
-  framedata.map(i => i.map(j => {
-    context.fillStyle = j;
-    context.fillRect(1,  1, Math.floor(canvasWidth/320), Math.floor(canvasHeight/180));
-
-  }))
-
-  //requestAnimationFrame(() => loop())
+  context.fillStyle = "#fff"
+  context.fillRect(0, 0, canvasWidth, canvasHeight);
+  for (let i=0; i<320; i++) {
+    for (let j=0; j<180; j++) {
+      context.fillStyle = framedata[i][j];
+      context.fillRect(canvasWidth/320*i,  canvasHeight/180*j, Math.floor(canvasWidth/320), Math.floor(canvasHeight/180));
+    }
+  }
+  console.log("Js time " + (Date.now() - jstime))
+  requestAnimationFrame(() => loop())
 }
 
 // Resize

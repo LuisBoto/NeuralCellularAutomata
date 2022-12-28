@@ -29,7 +29,7 @@ public class Cell {
     }
 
     public int[][] draw(int[][] frame) {
-        frame[this.column][this.row] = 0xff5733; //0xffffff00 | (this.getColorForCellState() >> 24);
+        frame[this.column][this.row] = this.getAlphaForCellState();
         return frame;
     }
 
@@ -53,8 +53,8 @@ public class Cell {
         }
     }
 
-    private int getColorForCellState() {
-        return (int) (this.state*255);
+    private int getAlphaForCellState() {
+        return (int)(this.state*255) ;
     }
 
     private class Neighbor {
