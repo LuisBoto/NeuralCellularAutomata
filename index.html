@@ -24,17 +24,8 @@
             column-gap: 1%;
         }
     </style>
-    <script src="lib/build/distributions/lib.wasm.js"></script>
 </head>
 <body>
-  <script>
-    WebAssembly.instantiateStreaming(fetch('lib/build/distributions/lib.wasm'), wasmImports)
-      .then(obj => {
-        wasmImports.instance = obj.instance;
-        obj.instance.exports.main();
-      })
-      .catch(err => document.write(err));
-  </script>
   <canvas id="canvas" width="1920" height="1080"></canvas>
   <br>
   <div class="configuration" id="configFields">
@@ -50,4 +41,8 @@
   </div>
   <br>
 </body>
+<footer>
+    <script src="lib/build/distributions/lib.wasm.js"></script>
+    <script src="js/Main.js"></script>
+</footer>
 </html>
