@@ -4,5 +4,5 @@ import java.awt.image.BufferedImage;
 
 public interface Layer {
     void update();
-    BufferedImage draw();
+    int[][] draw();
 }

@@ -1,7 +1,5 @@
 package NeuralCellularAutomata.model;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Random;
 import static NeuralCellularAutomata.global.Configuration.*;
@@ -30,11 +28,8 @@ public class Cell {
         this.state = this.state > 1 ? 1 : this.state < 0 ? 0 : this.state;
     }
 
-    public BufferedImage draw(BufferedImage frame) {
-        Graphics2D graph = frame.createGraphics();
-        graph.setColor(new Color( 255, 255, 255, (int) (this.state*255)));
-        graph.fill(new Rectangle(this.x, this.y, CANVAS_WIDTH/COLUMN_NUMBER, CANVAS_HEIGHT/ROW_NUMBER));
-        graph.dispose();
+    public int[][] draw(int[][] frame) {
+        frame[this.column][this.row] = 0xffffff00 | (this.getColorForCellState() >> 24);
         return frame;
     }
 
@@ -56,6 +51,10 @@ public class Cell {
                     neighborCell
             ));
         }
+    }
+
+    private int getColorForCellState() {
+        return (int) (this.state*255);
     }
 
     private class Neighbor {

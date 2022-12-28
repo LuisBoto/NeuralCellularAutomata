@@ -5,19 +5,20 @@ let minimumResize = 1;
 let canvasWidth = 1920;
 let canvasHeight = 1080;
 
-function callWebAssemblyFunction(functionName) {
-    WebAssembly.instantiateStreaming(fetch('../lib/build/distributions/lib.wasm'), wasmImports)
-      .then(obj => {
-        wasmImports.instance = obj.instance;
-        obj.instance.exports[functionName]();
-      })
-      .catch(err => document.write(err));
+let wasmModule;
+
+async function loadWasmModule() {
+  obj = await WebAssembly.instantiateStreaming(await fetch('../lib/build/distributions/lib.wasm'), wasmImports) 
+  wasmImports.instance = obj.instance;
+  wasmModule = obj.instance.exports;
 }
 
-function loop(){
-    //layer.update();
-    //layer.draw();
+async function start() {
+  await loadWasmModule();
+  wasmModule.main();
 }
+
+start();
 
 // Resize
 window.addEventListener('load', resize, false);
@@ -32,5 +33,3 @@ function resize() {
 
     context.scale(minimumResize, minimumResize);
 }
-
-callWebAssemblyFunction("main");

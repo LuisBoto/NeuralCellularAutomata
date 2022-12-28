@@ -16,11 +16,11 @@ public class Main {
     public static Layer LAYER;
     @Export
     public static void main() {
-        /*Document document = Window.document();
+        Document document = Window.document();
         HTMLElement div = document.createElement("div");
         Text text = document.createTextNode("Hello World, this text come from WebAssembly.");
         div.appendChild( text );
-        document.body().appendChild( div );*/
+        document.body().appendChild( div );
     }
 
     @Export
@@ -29,7 +29,7 @@ public class Main {
     }
 
     @Export
-    public static BufferedImage getFrame() {
+    public static int[][] getFrame() {
         LAYER.update();
         return LAYER.draw();
     }
