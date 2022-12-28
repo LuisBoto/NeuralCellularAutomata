@@ -37,7 +37,7 @@ public class Cell {
         this.y = CANVAS_HEIGHT/ROW_NUMBER*this.row;
     }
 
-    private void findNeighbors(Cell[][] cellMatrix) {
+    public void findNeighbors(Cell[][] cellMatrix) {
         this.neighbors = new ArrayList<Neighbor>();
         Coordinate currentCoordinate = new Coordinate(this.column, this.row);
         Coordinate neighborCoordinate;
@@ -50,6 +50,13 @@ public class Cell {
                     neighborCell
             ));
         }
+    }
+
+    private String getColorForCellState() {
+        String alpha = Double.toHexString(this.state*255).split("\\.")[0];
+        if (alpha.length() <= 1)
+            alpha = "0" + alpha;
+        return "#00000" + alpha;
     }
 
     private class Neighbor {
