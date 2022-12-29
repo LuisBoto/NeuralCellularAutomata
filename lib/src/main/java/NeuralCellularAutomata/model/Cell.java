@@ -28,11 +28,6 @@ public class Cell {
         this.state = this.state > 1 ? 1 : this.state < 0 ? 0 : this.state;
     }
 
-    public int[][] draw(int[][] frame) {
-        frame[this.column][this.row] = this.getAlphaForCellState();
-        return frame;
-    }
-
     private void calculateCellPositionOnCanvas() {
         this.x = CANVAS_WIDTH/COLUMN_NUMBER*this.column;
         this.y = CANVAS_HEIGHT/ROW_NUMBER*this.row;
@@ -53,7 +48,7 @@ public class Cell {
         }
     }
 
-    private int getAlphaForCellState() {
+    public int getAlphaForCellState() {
         return (int)(this.state*255) ;
     }
 

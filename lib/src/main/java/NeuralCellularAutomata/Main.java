@@ -30,7 +30,6 @@ public class Main {
 
     @Export
     public static int[][] getFrame() {
-        LAYER.update();
-        return LAYER.draw();
+        return LAYER.update();
     }
 }

@@ -15,18 +15,13 @@ public class MainLayer implements Layer {
     }
 
     @Override
-    public void update() {
-        for (int i=0; i<this.cells.length; i++)
-            for (int j=0; j<this.cells[i].length; j++)
-                this.cells[i][j].update();
-    }
-
-    @Override
-    public int[][] draw() {
+    public int[][] update() {
         int[][] frame = new int[COLUMN_NUMBER][ROW_NUMBER];
         for (int i=0; i<this.cells.length; i++)
-            for (int j=0; j<this.cells[i].length; j++)
-                frame = this.cells[i][j].draw(frame);
+            for (int j=0; j<this.cells[i].length; j++) {
+                this.cells[i][j].update();
+                frame[i][j] = cells[i][j].getAlphaForCellState();
+            }
         return frame;
     }
 
