@@ -5,32 +5,13 @@ class MainLayer {
     }
 
     initiate() {
-        this.background = new Background('#ffffff', 1920*0.5, 1080*0.5);
         this.recreateCellMatrix();
     }
 
     update() {
-        let workerNumber = navigator.hardwareConcurrency;
-        /*let running = 0;
-        for (let n=0; n<workerNumber; n++) {
-            const worker = new Worker('src/layers/UpdateWorker.js');
-            worker.onmessage = workerDone;
-            worker.postMessage(this.cells.slice(columnNumber/workerNumber*n, columnNumber/workerNumber*(n+1)));
-            running++;
-        }
-        function workerDone(e) {
-            running--;
-            layer.updateCellStatesFromWorkerResponse(e);
-            if (running==0) {
-                layer.draw();
-                requestAnimationFrame(() => loop());
-            }
-        }*/
-        for (let i=0; i<this.cells.length; i++)
-            for (let j=0; j<this.cells[i].length; j++)
-                this.cells[i][j].update();
-        this.draw();
-        requestAnimationFrame(() => loop());
+        let updateTime = Date.now();
+        this.cells.map(column => column.map(cell => cell.update()));
+        console.log("Update: "+(Date.now()-updateTime));
     }
 
     updateCellStatesFromWorkerResponse(e) {
@@ -42,10 +23,12 @@ class MainLayer {
     }
 
     draw() {
-        this.background.draw();
-        for (let i=0; i<this.cells.length; i++)
-            for (let j=0; j<this.cells[i].length; j++)
-                this.cells[i][j].draw();
+        context.fillStyle = "#fff";
+        context.fillRect(0, 0, canvasWidth, canvasHeight);
+
+        let drawTime = Date.now();
+        this.cells.map(column => column.filter(cell => cell.state == 1).map(cell => cell.draw()));
+        console.log("Draw: "+(Date.now()-drawTime));
     }
 
     populateCellArray() {

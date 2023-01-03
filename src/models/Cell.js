@@ -9,7 +9,7 @@ class Cell {
     update() {
         let totalState = 0;
         for (let neighbor of this.neighbors) {
-            //if (neighborCell.state > 0.1)
+            if (neighbor.cell.state >= 0.1)
             totalState += neighbor.cell.state * neighbor.kernelValue;
         }
         this.state = totalState + this.state*kernel[1][1];      
@@ -17,11 +17,9 @@ class Cell {
     }
 
     draw() {
-        if (this.state < 1)
-            return;
         context.fillStyle = this.getColorForCellState(this.state);
-        //context.fillRect(this.column, this.row, 1,1);
-        context.fillRect(this.x, this.y, this.width, this.height);
+        context.fillRect(this.column, this.row, 1,1);
+        //context.fillRect(this.x, this.y, this.width, this.height);
     }
 
     calculateCellPositionOnCanvas() {
