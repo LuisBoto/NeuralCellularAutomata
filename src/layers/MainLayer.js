@@ -38,27 +38,27 @@ class MainLayer {
                         + cellMatrix[iPlusOne][jMinusOne] * kernelValues[2][0];
             return updatedValue > 1.0 ? 1.0 : updatedValue < 0.0 ? 0.0 : updatedValue;
         }).setOutput([rowNumber, columnNumber]);
-        //.setGraphical(true);
+
+        this.paintCells = this.gpu.createKernel(function(cellMatrix) {
+            this.color(0, 0, 0, cellMatrix[this.thread.x][this.thread.y]);
+        })
+          .setOutput([rowNumber, columnNumber])
+          .setGraphical(true);
     }
 
     update() {
-        let updateTime = Date.now();
+        //let updateTime = Date.now();
         this.cells = this.updateCellMatrix(columnNumber, rowNumber, this.cells, kernel);
         //console.log(this.cells);
-        console.log("Update: "+(Date.now()-updateTime));
+        //console.log("Update: "+(Date.now()-updateTime));
     }
 
     draw() {
-        context.fillStyle = "#fff";
-        context.fillRect(0, 0, canvasWidth, canvasHeight);
-        let drawTime = Date.now();
-        for (let i=0; i<columnNumber; i++) {
-            for (let j=0; j<rowNumber; j++) {
-                context.fillStyle = Cell.getColorForCellState(this.cells[i][j]);
-                context.fillRect(i, j, 1,1);
-            }
-        }
-        console.log("Draw: "+(Date.now()-drawTime));
+        this.paintCells(this.cells);
+        
+        let newCanvas = this.paintCells.canvas;
+        canvas.parentNode.replaceChild(newCanvas, canvas);
+        canvas = newCanvas;
     }
 
     populateCellArray() {
