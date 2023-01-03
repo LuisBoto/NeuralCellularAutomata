@@ -7,47 +7,50 @@ class MainLayer {
     initiate() {
         this.recreateCellMatrix();
         this.gpu = new GPU();
-        this.updateCellMatrix = this.gpu.createKernel(function(cellMatrix, kernelValues) {
-            let step = [];
-            /*let updatedValue = 0;
-            //let iMinusOne, jMinusOne, iPlusOne, jPlusOne;
-            for (let i = 0; i < cellMatrix.lenght; i++) {
-                step[i] = [];
-                //iMinusOne = i==0 ? cellMatrix.lenght-1 : i-1;
-                //iPlusOne = i==cellMatrix.length-1 ? 0 : i+1;
-                for (let j = 0; j<cellMatrix[i].lenght; j++) {
-                    //jMinusOne = j==0 ? cellMatrix[i].lenght-1 : j-1;
-                    //jPlusOne = j==cellMatrix[i].length-1 ? 0 : j+1;
+        this.updateCellMatrix = this.gpu.createKernel(function(columnNumber, rowNumber, cellMatrix, kernelValues) {
+            let updatedValue = 0;
 
-                    updatedValue = 0.5;
-                        /*cellMatrix[i][j]*kernelValues[1][1]
-                        + cellMatrix[iMinusOne][j] + kernelValues[0][1]
-                        + cellMatrix[i][jMinusOne] + kernelValues[1][0]
-                        + cellMatrix[iMinusOne][jMinusOne] + kernelValues[0][0]
-                        + cellMatrix[iPlusOne][j] + kernelValues[2][1]
-                        + cellMatrix[i][jPlusOne] + kernelValues[1][2]
-                        + cellMatrix[iPlusOne][jPlusOne] + kernelValues[2][2]
-                        + cellMatrix[iMinusOne][jPlusOne] + kernelValues[0][2]
-                        + cellMatrix[iPlusOne][jMinusOne] + kernelValues[2][0];
-                    step[this.thread.y][this.thread.x].push(updatedValue > 1 ? 1 : updatedValue < 0 ? 0 : updatedValue);
-                }
-            }
-            return step;*/
-            return 0;
-        }).setOutput([320, 180]);
+            let iMinusOne = this.thread.y-1;
+            if (this.thread.y == 0)
+                iMinusOne = columnNumber-1;
+
+            let iPlusOne = this.thread.y+1;
+            if (this.thread.y == columnNumber-1)
+                iPlusOne = 0;
+            
+            let jMinusOne = this.thread.x-1;
+            if (this.thread.x == 0)
+                jMinusOne = rowNumber-1;
+
+            let jPlusOne = this.thread.x+1;
+            if (this.thread.x == rowNumber-1) 
+                jPlusOne = 0;
+
+            updatedValue = 
+                        cellMatrix[this.thread.y][this.thread.x]*kernelValues[1][1]
+                        + cellMatrix[iMinusOne][this.thread.x] * kernelValues[0][1]
+                        + cellMatrix[this.thread.y][jMinusOne] * kernelValues[1][0]
+                        + cellMatrix[iMinusOne][jMinusOne] * kernelValues[0][0]
+                        + cellMatrix[iPlusOne][this.thread.x] * kernelValues[2][1]
+                        + cellMatrix[this.thread.y][jPlusOne] * kernelValues[1][2]
+                        + cellMatrix[iPlusOne][jPlusOne] * kernelValues[2][2]
+                        + cellMatrix[iMinusOne][jPlusOne] * kernelValues[0][2]
+                        + cellMatrix[iPlusOne][jMinusOne] * kernelValues[2][0];
+            return updatedValue > 1.0 ? 1.0 : updatedValue < 0.0 ? 0.0 : updatedValue;
+        }).setOutput([rowNumber, columnNumber]);
         //.setGraphical(true);
     }
 
     update() {
         let updateTime = Date.now();
-        this.cells = this.updateCellMatrix(this.cells, kernel);
+        this.cells = this.updateCellMatrix(columnNumber, rowNumber, this.cells, kernel);
+        //console.log(this.cells);
         console.log("Update: "+(Date.now()-updateTime));
     }
 
     draw() {
         context.fillStyle = "#fff";
         context.fillRect(0, 0, canvasWidth, canvasHeight);
-
         let drawTime = Date.now();
         for (let i=0; i<columnNumber; i++) {
             for (let j=0; j<rowNumber; j++) {
