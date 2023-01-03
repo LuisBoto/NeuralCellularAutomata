@@ -9,7 +9,7 @@ class Cell {
     update() {
         let totalState = 0;
         for (let neighbor of this.neighbors) {
-            if (neighbor.cell.state >= 0.1)
+            //if (neighbor.cell.state >= 0.1)
             totalState += neighbor.cell.state * neighbor.kernelValue;
         }
         this.state = totalState + this.state*kernel[1][1];      
@@ -50,8 +50,8 @@ class Cell {
             this.state = 0;
     }
 
-    getColorForCellState() {
-        let alpha = (this.state*255).toString(16).split('.')[0];
+    static getColorForCellState(state) {
+        let alpha = (state*255).toString(16).split('.')[0];
         if (alpha.length <= 1) 
         alpha = '0' + alpha;
         return '#000000' + alpha;
