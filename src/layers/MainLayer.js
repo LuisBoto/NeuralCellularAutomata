@@ -6,7 +6,10 @@ class MainLayer {
 
     initiate() {
         this.recreateCellMatrix();
-        this.gpu = new GPU();
+        this.gpu = new GPU({
+            canvas,
+            context: gl
+          });
         this.updateCellMatrix = this.gpu.createKernel(function(columnNumber, rowNumber, cellMatrix, kernelValues) {
             let updatedValue = 0;
 
@@ -40,25 +43,24 @@ class MainLayer {
         }).setOutput([rowNumber, columnNumber]);
 
         this.paintCells = this.gpu.createKernel(function(cellMatrix) {
-            this.color(0, 0, 0, cellMatrix[this.thread.x][this.thread.y]);
-        })
-          .setOutput([rowNumber, columnNumber])
+            this.color(100, 100, 0, 255*cellMatrix[this.thread.y][this.thread.x]);
+        }).setOutput([columnNumber, rowNumber])
           .setGraphical(true);
     }
 
     update() {
         //let updateTime = Date.now();
         this.cells = this.updateCellMatrix(columnNumber, rowNumber, this.cells, kernel);
-        //console.log(this.cells);
         //console.log("Update: "+(Date.now()-updateTime));
     }
 
     draw() {
+        //console.log(this.cells);
         this.paintCells(this.cells);
         
-        let newCanvas = this.paintCells.canvas;
+        /*let newCanvas = this.paintCells.canvas;
         canvas.parentNode.replaceChild(newCanvas, canvas);
-        canvas = newCanvas;
+        canvas = newCanvas;*/
     }
 
     populateCellArray() {

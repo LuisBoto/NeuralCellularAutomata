@@ -3,7 +3,8 @@ let canvasWidth = 1920;
 let canvasHeight = 1080;
 
 let canvas = document.getElementById("canvas");
-let context = canvas.getContext("2d");
+//let context = canvas.getContext('2d');
+const gl = canvas.getContext('webgl2', { premultipliedAlpha: false });
 
 let layer;
 
@@ -19,7 +20,7 @@ function loop(){
 }
 
 // Resize
-window.addEventListener('load', resize, false);
+//window.addEventListener('load', resize, false);
 function resize() {
     console.log("Resize");
     let resizeWidth = parseFloat(window.innerWidth*0.80 / canvas.width);
@@ -32,3 +33,4 @@ function resize() {
     context.scale(minimumResize, minimumResize);
     start();
 }
+start();
