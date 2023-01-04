@@ -39,7 +39,8 @@ class MainLayer {
                         + cellMatrix[iPlusOne][jPlusOne] * kernelValues[2][2]
                         + cellMatrix[iMinusOne][jPlusOne] * kernelValues[0][2]
                         + cellMatrix[iPlusOne][jMinusOne] * kernelValues[2][0];
-            return updatedValue > 1.0 ? 1.0 : updatedValue < 0.0 ? 0.0 : updatedValue;
+            updatedValue = updatedValue > 1.0 ? 1.0 : updatedValue < -1.0 ? -1.0 : updatedValue;
+            return -1/(0.89*updatedValue*updatedValue+1)+1;
         }).setOutput([rowNumber, columnNumber]);
 
         this.paintCells = this.gpu.createKernel(function(cellMatrix) {
