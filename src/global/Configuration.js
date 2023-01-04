@@ -1,10 +1,10 @@
-let columnNumber = 320, rowNumber = 180;
+let columnNumber = 300, rowNumber = 700;
 let loopID;
 
 let kernel = [
-    [-0.156,    0.207,      0.476],
-    [0.643,    -0.153,     -0.252],
-    [-0.6,      0.313,     -0.982]
+    [0.8,    -0.85,      0.8],
+    [-0.85,    -0.2,     -0.85],
+    [0.8,     -0.85,     0.8]
 ]
 
 function updateConfiguration() {

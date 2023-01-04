@@ -9,7 +9,7 @@ class Cell {
     update() {
         let totalState = 0;
         for (let neighbor of this.neighbors) {
-            //if (neighborCell.state > 0.1)
+            //if (neighbor.cell.state >= 0.1)
             totalState += neighbor.cell.state * neighbor.kernelValue;
         }
         this.state = totalState + this.state*kernel[1][1];      
@@ -17,15 +17,16 @@ class Cell {
     }
 
     draw() {
-        if (this.state <= 0.1)
-            return;
         context.fillStyle = this.getColorForCellState(this.state);
-        context.fillRect(Math.floor(this.x), Math.floor(this.y), Math.floor(canvasWidth/columnNumber), Math.floor(canvasHeight/rowNumber));
+        context.fillRect(this.column, this.row, 1,1);
+        //context.fillRect(this.x, this.y, this.width, this.height);
     }
 
     calculateCellPositionOnCanvas() {
         this.x = canvasWidth/columnNumber*this.column;
         this.y = canvasHeight/rowNumber*this.row;
+        this.width = Math.floor(canvasWidth/columnNumber);
+        this.height = Math.floor(canvasHeight/rowNumber);
     }
 
     findNeighbors(cellMatrix) {
@@ -49,8 +50,8 @@ class Cell {
             this.state = 0;
     }
 
-    getColorForCellState() {
-        let alpha = (this.state*255).toString(16).split('.')[0];
+    static getColorForCellState(state) {
+        let alpha = (state*255).toString(16).split('.')[0];
         if (alpha.length <= 1) 
         alpha = '0' + alpha;
         return '#000000' + alpha;
