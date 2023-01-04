@@ -39,12 +39,15 @@ class MainLayer {
                         + cellMatrix[iPlusOne][jPlusOne] * kernelValues[2][2]
                         + cellMatrix[iMinusOne][jPlusOne] * kernelValues[0][2]
                         + cellMatrix[iPlusOne][jMinusOne] * kernelValues[2][0];
-            updatedValue = updatedValue > 1.0 ? 1.0 : updatedValue < -1.0 ? -1.0 : updatedValue;
-            return -1/(0.89*updatedValue*updatedValue+1)+1;
+            //updatedValue = updatedValue > 1.0 ? 1.0 : updatedValue < 0 ? 0 : updatedValue;
+            return -1/(0.89*Math.pow(updatedValue, 2)+1)+1;
         }).setOutput([rowNumber, columnNumber]);
 
         this.paintCells = this.gpu.createKernel(function(cellMatrix) {
-            this.color(0, 0, 0, 255*cellMatrix[this.thread.y][this.thread.x]);
+            if (cellMatrix[this.thread.y][this.thread.x] < 0.1)
+                this.color(0,0,0,1);
+            else
+                this.color(192, 176, 0, cellMatrix[this.thread.y][this.thread.x]);//+1)/2);
         }).setOutput([rowNumber, columnNumber])
           .setGraphical(true);
     }
@@ -64,7 +67,7 @@ class MainLayer {
         for (let i = 0; i < columnNumber; i++) {
             this.cells[i] = []
             for (let j = 0; j < rowNumber; j++)
-                this.cells[i].push(Math.random());
+                this.cells[i].push(Math.random()*2-1);
         }
     }
 
