@@ -43,8 +43,8 @@ class MainLayer {
         }).setOutput([rowNumber, columnNumber]);
 
         this.paintCells = this.gpu.createKernel(function(cellMatrix) {
-            this.color(100, 100, 0, 255*cellMatrix[this.thread.y][this.thread.x]);
-        }).setOutput([columnNumber, rowNumber])
+            this.color(0, 0, 0, 255*cellMatrix[this.thread.y][this.thread.x]);
+        }).setOutput([rowNumber, columnNumber])
           .setGraphical(true);
     }
 
@@ -52,34 +52,23 @@ class MainLayer {
         //let updateTime = Date.now();
         this.cells = this.updateCellMatrix(columnNumber, rowNumber, this.cells, kernel);
         //console.log("Update: "+(Date.now()-updateTime));
+        //console.log(this.cells);
     }
 
     draw() {
-        //console.log(this.cells);
         this.paintCells(this.cells);
-        
-        /*let newCanvas = this.paintCells.canvas;
-        canvas.parentNode.replaceChild(newCanvas, canvas);
-        canvas = newCanvas;*/
     }
 
     populateCellArray() {
         for (let i = 0; i < columnNumber; i++) {
             this.cells[i] = []
             for (let j = 0; j < rowNumber; j++)
-                this.addNewCell(i, j);
+                this.cells[i].push(Math.random());
         }
-       /* for (let i = 0; i < columnNumber; i++) 
-            for (let j = 0; j < rowNumber; j++)
-                this.cells[i][j].findNeighbors(this.cells);*/
     }
 
     recreateCellMatrix() {        
         this.cells = [];
         this.populateCellArray();
-    }
-
-    addNewCell(column, row) {
-        this.cells[column].push(Math.random());
     }
 }
