@@ -1,8 +1,5 @@
 let presets = [];
-presets.push({ name: "Cow Pattern", population: 1000, speed: 6, angle: 180, nAngle: -15, nRadius: 75});
-presets.push({ name: "Moving Clusters", population: 1000, speed: 6, angle: 180, nAngle: -7, nRadius: 75});
-presets.push({ name: "Rings", population: 1000, speed: 6, angle: 45, nAngle: 4, nRadius: 80});
-presets.push({ name: "Initial configuration", population: 1000, speed: 6, angle: 180, nAngle: 17, nRadius: 75});
+presets.push({ name: "Initial configuration", columnNumber: 1920, rowNumber: 1080});
 
 function createPresetButtons() {
     let htmlButton;
@@ -14,11 +11,8 @@ function createPresetButtons() {
 
 function loadPreset(index) {
     let preset = presets[index];
-    particleNumber = preset.population;
-    particleSpeed = preset.speed;
-    particleTurningAngle = preset.angle;
-    neighborTurningAngle = preset.nAngle;
-    neighborhoodRadius = preset.nRadius;
+    columnNumber = preset.columnNumber;
+    rowNumber = preset.rowNumber;
     updateInputFieldsValues();
     updateConfiguration();
 }

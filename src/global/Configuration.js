@@ -1,4 +1,4 @@
-let columnNumber = 1080, rowNumber = 1920;
+let columnNumber = 1920, rowNumber = 1080;
 let loopID;
 
 let kernel = [
@@ -11,7 +11,7 @@ function updateConfiguration() {
     columnNumber = parseInt(document.getElementById("inputColumnNumber").value);
     rowNumber = parseInt(document.getElementById("inputRowNumber").value);
 
-    layer.populateCellGrid();
+    layer.initiate();
 }
 
 function updateInputFieldsValues() {

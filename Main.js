@@ -19,18 +19,4 @@ function loop(){
     requestAnimationFrame(() => loop());
 }
 
-// Resize
-//window.addEventListener('load', resize, false);
-function resize() {
-    console.log("Resize");
-    let resizeWidth = parseFloat(window.innerWidth*0.80 / canvas.width);
-    let resizeHeight = parseFloat(window.innerHeight*0.80 / canvas.height);
-
-    let minimumResize = Math.min(resizeWidth, resizeHeight);
-    canvas.width = canvas.width*minimumResize;
-    canvas.height = canvas.height*minimumResize;
-  
-    context.scale(minimumResize, minimumResize);
-    start();
-}
 start();
