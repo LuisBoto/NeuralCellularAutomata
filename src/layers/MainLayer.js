@@ -41,7 +41,10 @@ class MainLayer {
                         + cellMatrix[iPlusOne][jMinusOne] * kernelValues[2][0];
             //updatedValue = updatedValue > 1.0 ? 1.0 : updatedValue < 0 ? 0 : updatedValue;
             return -1/(0.89*Math.pow(updatedValue, 2)+1)+1;
-        }).setOutput([rowNumber, columnNumber]);
+        }, {
+            immutable: true
+        }).setOutput([rowNumber, columnNumber])
+        .setPipeline(true);
 
         this.paintCells = this.gpu.createKernel(function(cellMatrix) {
             if (cellMatrix[this.thread.y][this.thread.x] < 0.1)
@@ -53,9 +56,10 @@ class MainLayer {
     }
 
     update() {
-        //let updateTime = Date.now();
-        this.cells = this.updateCellMatrix(columnNumber, rowNumber, this.cells, kernel);
-        //console.log("Update: "+(Date.now()-updateTime));
+        let cellTexture = this.updateCellMatrix(columnNumber, rowNumber, this.cells, kernel);
+        if (this.cells.delete)
+            this.cells.delete();
+        this.cells = cellTexture;
         //console.log(this.cells);
     }
 

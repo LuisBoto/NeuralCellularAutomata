@@ -1,4 +1,4 @@
-let columnNumber = 300, rowNumber = 700;
+let columnNumber = 600, rowNumber = 600;
 let loopID;
 
 let kernel = [
