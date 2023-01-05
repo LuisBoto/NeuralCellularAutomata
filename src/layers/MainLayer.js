@@ -31,26 +31,13 @@ class MainLayer {
     generateUpdateAndDrawKernels() {
         this.gpu = new GPU({ canvas, context: gl });
         this.updateCellMatrix = this.gpu.createKernel(function(columnNumber, rowNumber, cellMatrix, kernelValues) {
-            let updatedValue = 0;
-
-            let iMinusOne = this.thread.y-1;
-            if (this.thread.y == 0)
-                iMinusOne = columnNumber-1;
-
-            let iPlusOne = this.thread.y+1;
-            if (this.thread.y == columnNumber-1)
-                iPlusOne = 0;
+            let iMinusOne = this.thread.y == 0 ? columnNumber-1 : Math.floor(this.thread.y-1);
+            let iPlusOne = this.thread.y == columnNumber-1 ? 0 : Math.floor(this.thread.y+1);
             
-            let jMinusOne = this.thread.x-1;
-            if (this.thread.x == 0)
-                jMinusOne = rowNumber-1;
+            let jMinusOne = this.thread.x == 0 ? rowNumber-1 : Math.floor(this.thread.x-1);
+            let jPlusOne = this.thread.x == rowNumber-1 ? 0 : Math.floor(this.thread.x+1);
 
-            let jPlusOne = this.thread.x+1;
-            if (this.thread.x == rowNumber-1) 
-                jPlusOne = 0;
-
-            updatedValue = 
-                        cellMatrix[this.thread.y][this.thread.x]*kernelValues[1][1]
+            let updatedValue = cellMatrix[this.thread.y][this.thread.x]*kernelValues[1][1]
                         + cellMatrix[iMinusOne][this.thread.x] * kernelValues[0][1]
                         + cellMatrix[this.thread.y][jMinusOne] * kernelValues[1][0]
                         + cellMatrix[iMinusOne][jMinusOne] * kernelValues[0][0]
