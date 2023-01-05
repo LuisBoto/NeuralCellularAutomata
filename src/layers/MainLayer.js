@@ -5,11 +5,31 @@ class MainLayer {
     }
 
     initiate() {
-        this.recreateCellMatrix();
-        this.gpu = new GPU({
-            canvas,
-            context: gl
-          });
+        this.populateCellGrid()
+        this.generateUpdateAndDrawKernels();
+    }
+
+    update() {
+        let cellTexture = this.updateCellMatrix(columnNumber, rowNumber, this.cells, kernel);
+        if (this.cells.delete) this.cells.delete();
+        this.cells = cellTexture;
+    }
+
+    draw() {
+        this.paintCells(this.cells);
+    }
+
+    populateCellGrid() {
+        this.cells = [];
+        for (let i = 0; i < columnNumber; i++) {
+            this.cells[i] = []
+            for (let j = 0; j < rowNumber; j++)
+                this.cells[i].push(Math.random()*2-1);
+        }
+    }
+
+    generateUpdateAndDrawKernels() {
+        this.gpu = new GPU({ canvas, context: gl });
         this.updateCellMatrix = this.gpu.createKernel(function(columnNumber, rowNumber, cellMatrix, kernelValues) {
             let updatedValue = 0;
 
@@ -41,42 +61,14 @@ class MainLayer {
                         + cellMatrix[iPlusOne][jMinusOne] * kernelValues[2][0];
             //updatedValue = updatedValue > 1.0 ? 1.0 : updatedValue < 0 ? 0 : updatedValue;
             return -1/(0.89*Math.pow(updatedValue, 2)+1)+1;
-        }, {
-            immutable: true
-        }).setOutput([rowNumber, columnNumber])
+        }, { immutable: true })
+        .setOutput([rowNumber, columnNumber])
         .setPipeline(true);
 
         this.paintCells = this.gpu.createKernel(function(cellMatrix) {
-            if (cellMatrix[this.thread.y][this.thread.x] < 0.1)
-                this.color(0,0,0,1);
-            else
-                this.color(192, 176, 0, cellMatrix[this.thread.y][this.thread.x]);//+1)/2);
+            let cellValue = cellMatrix[this.thread.y][this.thread.x];
+            cellValue > 0.1 ? this.color(150*cellValue, 140*cellValue, 0, 1) : this.color(0,0,0);
         }).setOutput([rowNumber, columnNumber])
           .setGraphical(true);
-    }
-
-    update() {
-        let cellTexture = this.updateCellMatrix(columnNumber, rowNumber, this.cells, kernel);
-        if (this.cells.delete)
-            this.cells.delete();
-        this.cells = cellTexture;
-        //console.log(this.cells);
-    }
-
-    draw() {
-        this.paintCells(this.cells);
-    }
-
-    populateCellArray() {
-        for (let i = 0; i < columnNumber; i++) {
-            this.cells[i] = []
-            for (let j = 0; j < rowNumber; j++)
-                this.cells[i].push(Math.random()*2-1);
-        }
-    }
-
-    recreateCellMatrix() {        
-        this.cells = [];
-        this.populateCellArray();
     }
 }

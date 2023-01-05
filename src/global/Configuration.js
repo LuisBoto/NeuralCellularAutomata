@@ -1,4 +1,4 @@
-let columnNumber = 600, rowNumber = 600;
+let columnNumber = 1080, rowNumber = 1920;
 let loopID;
 
 let kernel = [
@@ -11,11 +11,7 @@ function updateConfiguration() {
     columnNumber = parseInt(document.getElementById("inputColumnNumber").value);
     rowNumber = parseInt(document.getElementById("inputRowNumber").value);
 
-    updateCellPopulation();
-}
-
-function updateCellPopulation() {
-    layer.recreateCellMatrix();
+    layer.populateCellGrid();
 }
 
 function updateInputFieldsValues() {
