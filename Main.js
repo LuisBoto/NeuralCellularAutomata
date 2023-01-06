@@ -10,6 +10,7 @@ let layer;
 
 function start() {
     layer = new MainLayer();
+    loadPreset(0);
     loop();
 }
 

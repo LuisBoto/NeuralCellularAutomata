@@ -27,4 +27,3 @@ function loadPreset(index) {
 }
 
 createPresetButtons();
-loadPreset(0);

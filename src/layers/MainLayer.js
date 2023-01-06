@@ -16,7 +16,7 @@ class MainLayer {
     }
 
     draw() {
-        this.paintCells(this.cells);
+        this.paintCells(this.cells, cellColor.r, cellColor.g, cellColor.b);
     }
 
     populateCellGrid() {
@@ -48,15 +48,14 @@ class MainLayer {
                         + cellMatrix[yPlusOne][xPlusOne] * kernelValues[2][2]
                         + cellMatrix[yMinusOne][xPlusOne] * kernelValues[0][2]
                         + cellMatrix[yPlusOne][xMinusOne] * kernelValues[2][0];
-            //updatedValue = updatedValue > 1.0 ? 1.0 : updatedValue < 0 ? 0 : updatedValue;
             return 0.0+activation(updatedValue);
         }, { immutable: true })
         .setOutput([columnNumber, rowNumber])
         .setPipeline(true);
 
-        this.paintCells = this.gpu.createKernel(function(cellMatrix) {
+        this.paintCells = this.gpu.createKernel(function(cellMatrix, r, g, b) {
             let cellValue = cellMatrix[this.thread.y][this.thread.x];
-            cellValue > 0.1 ? this.color(150*cellValue, 140*cellValue, 0, 1) : this.color(0,0,0);
+            cellValue > 0.1 ? this.color(r*cellValue, g*cellValue, b*cellValue, 1) : this.color(0,0,0);
         }).setOutput([columnNumber, rowNumber])
           .setGraphical(true);
     }
