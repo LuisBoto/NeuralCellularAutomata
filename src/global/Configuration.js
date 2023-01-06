@@ -1,5 +1,5 @@
 let columnNumber = 1920, rowNumber = 1080;
-let activationFunctionBody = "return -1/(0.89*Math.pow(x, 2)+1)+1;";
+let activationFunctionBody = "return x";
 let loopID;
 
 let kernel = [
@@ -8,7 +8,7 @@ let kernel = [
     [0.8,     -0.85,     0.8]
 ]
 
-let updateActivation = () => {
+function updateActivation() {
     eval( "function activation(x) { " + activationFunctionBody + " }" )
     window["activation"] = activation;
 };
@@ -17,8 +17,8 @@ function updateConfiguration() {
     columnNumber = parseInt(document.getElementById("inputColumnNumber").value);
     rowNumber = parseInt(document.getElementById("inputRowNumber").value);
     activationFunctionBody = document.getElementById("activationFunctionBody").value;
-    updateActivation();
 
+    updateActivation();
     layer.initiate();
 }
 
