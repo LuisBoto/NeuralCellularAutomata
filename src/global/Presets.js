@@ -12,9 +12,9 @@ presets.push({
     name: "Flames", 
     columnNumber: 1920, rowNumber: 1080, 
     activationFunctionBody: "return -1/Math.pow(2, (Math.pow(x, 2)))+1",
-    kernel: [[0.994,    -0.433,      0.959],
-             [-0.815,    -0.602,     -0.646],
-             [0.514,     -0.908,     0.175]],
+    kernel: [[1,       -0.45,      1],
+             [-0.8,    -0.55,     -0.65],
+             [0.5,     -0.85,      0.2]],
     color: "EA0000"
 });
 presets.push({ 
