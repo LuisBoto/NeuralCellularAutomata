@@ -1,4 +1,5 @@
 let columnNumber = 1920, rowNumber = 1080;
+let activationFunctionBody = "return -1/(0.89*Math.pow(x, 2)+1)+1;";
 let loopID;
 
 let kernel = [

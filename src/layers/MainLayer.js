@@ -30,6 +30,17 @@ class MainLayer {
 
     generateUpdateAndDrawKernels() {
         this.gpu = new GPU({ canvas, context: gl });
+
+        //const activationFunction = eval("(x) => { " + activationFunctionBody + " }")
+        function activationFunction(x) {
+            return x;
+        }
+        activationFunction.
+        console.log(activationFunction(1));
+        //activationFunction.name = "activationFunction";
+
+        this.gpu.addFunction(activationFunction, { argumentTypes: { x: 'Number' },  returnType: 'Float' });
+
         this.updateCellMatrix = this.gpu.createKernel(function(rowNumber, columnNumber, cellMatrix, kernelValues) {
             let xMinusOne = this.thread.x == 0 ? rowNumber-1 : Math.floor(this.thread.x-1);
             let xPlusOne = this.thread.x == rowNumber-1 ? 0 : Math.floor(this.thread.x+1);
@@ -46,7 +57,7 @@ class MainLayer {
                         + cellMatrix[yMinusOne][xPlusOne] * kernelValues[0][2]
                         + cellMatrix[yPlusOne][xMinusOne] * kernelValues[2][0];
             //updatedValue = updatedValue > 1.0 ? 1.0 : updatedValue < 0 ? 0 : updatedValue;
-            return -1/(0.89*Math.pow(updatedValue, 2)+1)+1;
+            return activationFunction(updatedValue);
         }, { immutable: true })
         .setOutput([columnNumber, rowNumber])
         .setPipeline(true);
