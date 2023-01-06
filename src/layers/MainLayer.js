@@ -34,17 +34,18 @@ class MainLayer {
         this.gpu.addFunction(activation);
 
         this.updateCellMatrix = this.gpu.createKernel(function(rowNumber, columnNumber, cellMatrix, kernelValues) {
-            let xMinusOne = this.thread.x == 0 ? rowNumber-1 : Math.floor(this.thread.x-1);
-            let xPlusOne = this.thread.x == rowNumber-1 ? 0 : Math.floor(this.thread.x+1);
-            let yMinusOne = this.thread.y == 0 ? columnNumber-1 : Math.floor(this.thread.y-1);
-            let yPlusOne = this.thread.y == columnNumber-1 ? 0 : Math.floor(this.thread.y+1);
+            let x = Math.floor(this.thread.x), y = Math.floor(this.thread.y);
+            let xMinusOne = x == 0 ? rowNumber-1 : x-1;
+            let xPlusOne = x == rowNumber-1 ? 0 : x+1;
+            let yMinusOne = y == 0 ? columnNumber-1 : y-1;
+            let yPlusOne = y == columnNumber-1 ? 0 : y+1;
 
-            let updatedValue = cellMatrix[this.thread.y][this.thread.x]*kernelValues[1][1]
-                        + cellMatrix[yMinusOne][this.thread.x] * kernelValues[0][1]
-                        + cellMatrix[this.thread.y][xMinusOne] * kernelValues[1][0]
+            let updatedValue = cellMatrix[y][x]*kernelValues[1][1]
+                        + cellMatrix[yMinusOne][x] * kernelValues[0][1]
+                        + cellMatrix[y][xMinusOne] * kernelValues[1][0]
                         + cellMatrix[yMinusOne][xMinusOne] * kernelValues[0][0]
-                        + cellMatrix[yPlusOne][this.thread.x] * kernelValues[2][1]
-                        + cellMatrix[this.thread.y][xPlusOne] * kernelValues[1][2]
+                        + cellMatrix[yPlusOne][x] * kernelValues[2][1]
+                        + cellMatrix[y][xPlusOne] * kernelValues[1][2]
                         + cellMatrix[yPlusOne][xPlusOne] * kernelValues[2][2]
                         + cellMatrix[yMinusOne][xPlusOne] * kernelValues[0][2]
                         + cellMatrix[yPlusOne][xMinusOne] * kernelValues[2][0];

@@ -1,0 +1,23 @@
+@import "./canvasBackground.css";
+
+* { padding: 0; margin: 0; }
+canvas {
+    background: #fff;
+    display: block;
+    margin: 0 auto;
+}
+
+body {
+    background: #ffffff;
+}
+
+.configuration {
+    margin: auto;
+    display: flex;
+    align-items: center;
+    width: 50%;
+    justify-content: center;
+    column-gap: 1%;
+    color:#fff;
+    border-style: double;
+}

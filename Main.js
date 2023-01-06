@@ -1,10 +1,8 @@
 // Canvas & context
-let canvasWidth = 1920;
-let canvasHeight = 1080;
-
 let canvas = document.getElementById("canvas");
-//let context = canvas.getContext('2d');
 const gl = canvas.getContext('webgl2', { premultipliedAlpha: false });
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
 let layer;
 
