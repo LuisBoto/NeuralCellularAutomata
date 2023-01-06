@@ -24,7 +24,7 @@ class MainLayer {
         for (let i = 0; i < rowNumber; i++) {
             this.cells[i] = []
             for (let j = 0; j < columnNumber; j++)
-                this.cells[i].push(Math.random()*2-1);
+                this.cells[i].push(Math.random() > 0.5 ? 1 : 0);
         }
     }
 

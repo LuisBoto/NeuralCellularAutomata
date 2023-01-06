@@ -6,7 +6,7 @@ presets.push({
     kernel: [[0.8,    -0.85,      0.8],
              [-0.85,    -0.2,     -0.85],
              [0.8,     -0.85,     0.8]],
-    color: "209f00"
+    color: "209F00"
 });
 presets.push({ 
     name: "Flames", 
@@ -15,7 +15,16 @@ presets.push({
     kernel: [[0.994,    -0.433,      0.959],
              [-0.815,    -0.602,     -0.646],
              [0.514,     -0.908,     0.175]],
-    color: "990000"
+    color: "EA0000"
+});
+presets.push({ 
+    name: "Conway's GOL", 
+    columnNumber: 1920, rowNumber: 1080, 
+    activationFunctionBody: "return (x==3 || x==11 || x==12) ? 1 : 0;",
+    kernel: [[1,          1,          1],
+             [1,          9,          1],
+             [1,          1,          1]],
+    color: "FFFFFF"
 });
 
 function createPresetButtons() {
