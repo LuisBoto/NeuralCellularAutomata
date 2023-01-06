@@ -17,11 +17,23 @@
 <canvas id="canvas"></canvas>
 <div id="contentDiv">
     <div class="configuration" id="configFields">
-        <label for="inputColumnNumber">Column number:</label>
-        <input id="inputColumnNumber" size="5" onchange="updateConfiguration()"/>
+        <label style="display:none;" for="inputColumnNumber">Column number:</label>
+        <input style="display:none;" id="inputColumnNumber" size="5" onchange="updateConfiguration()"/>
+        <label style="display:none;" for="inputRowNumber">Row number:</label>
+        <input style="display:none;" id="inputRowNumber" size="5" onchange="updateConfiguration()"/>
 
-        <label for="inputRowNumber">Row number:</label>
-        <input id="inputRowNumber" size="5" onchange="updateConfiguration()"/>
+        <label for="kernelInput">Kernel:</label>
+        <div id="kernelInput">
+            <input id="kernel00" size="6" onchange="updateConfiguration()"/>
+            <input id="kernel01" size="6" onchange="updateConfiguration()"/>
+            <input id="kernel02" size="6" onchange="updateConfiguration()"/>
+            <input id="kernel10" size="6" onchange="updateConfiguration()"/>
+            <input id="kernel11" size="6" onchange="updateConfiguration()"/>
+            <input id="kernel12" size="6" onchange="updateConfiguration()"/>
+            <input id="kernel20" size="6" onchange="updateConfiguration()"/>
+            <input id="kernel21" size="6" onchange="updateConfiguration()"/>
+            <input id="kernel22" size="6" onchange="updateConfiguration()"/>
+        </div>
     </div>
     <br>
     <div class="configuration" id="activationFunction">
@@ -34,10 +46,10 @@
     </div>
 </div>
 
-<script defer src="src/layers/MainLayer.js"></script>
-<script defer src="src/global/Configuration.js"></script>
-<script defer src="src/global/Presets.js"></script>
-<script defer src="./Main.js"></script>
+<script src="src/layers/MainLayer.js"></script>
+<script src="src/global/Configuration.js"></script>
+<script src="src/global/Presets.js"></script>
+<script src="./Main.js"></script>
 
 </body>
 </html>
