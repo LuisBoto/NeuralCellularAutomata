@@ -2,7 +2,6 @@ let columnNumber = 1920, rowNumber = 1080;
 let activationFunctionBody = "return x > 1 ? 1 : x < 0 ? 0 : x;";
 let loopID;
 let cellColor = hexToRgb("00f200");
-console.log(cellColor);
 
 let kernel = [
     [0.8,    -0.85,      0.8],
