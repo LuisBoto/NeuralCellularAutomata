@@ -21,3 +21,5 @@ function updateInputFieldsValues() {
 }
 
 updateInputFieldsValues();
+
+eval( "function activation(x) { " + activationFunctionBody + " }" );
