@@ -27,7 +27,7 @@ presets.push({
     name: "Lava lamp", 
     activationFunctionBody: "return -1/(0.89*Math.pow(x, 2)+1)+1;",
     kernel: [[-0.31,  0.75,  -0.31],
-             [0.75,   0.53,  0.75],
+             [0.75,   0.56,  0.75],
              [-0.31, 0.15, -0.31]],
     color: "FFaa00"
 });

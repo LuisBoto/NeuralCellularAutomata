@@ -10,7 +10,7 @@ class MainLayer {
     }
 
     update() {
-        let cellTexture = this.updateCellMatrix(rowNumber, columnNumber, this.cells, kernel);
+        let cellTexture = this.updateCellMatrix(columnNumber, rowNumber, this.cells, kernel);
         if (this.cells.delete) this.cells.delete();
         this.cells = cellTexture;
     }
@@ -35,10 +35,10 @@ class MainLayer {
 
         this.updateCellMatrix = this.gpu.createKernel(function(columnNumber, rowNumber, cellMatrix, kernelValues) {
             let x = Math.floor(this.thread.x), y = Math.floor(this.thread.y);
-            let xMinusOne = x == 0 ? rowNumber-1 : x-1;
-            let xPlusOne = x == rowNumber-1 ? 0 : x+1;
-            let yMinusOne = y == 0 ? columnNumber-1 : y-1;
-            let yPlusOne = y == columnNumber-1 ? 0 : y+1;
+            let yMinusOne = y == 0 ? rowNumber-1 : y-1;
+            let yPlusOne = y == rowNumber-1 ? 0 : y+1;
+            let xMinusOne = x == 0 ? columnNumber-1 : x-1;
+            let xPlusOne = x == columnNumber-1 ? 0 : x+1;
 
             let updatedValue = cellMatrix[y][x]*kernelValues[1][1]
                         + cellMatrix[yMinusOne][x] * kernelValues[0][1]

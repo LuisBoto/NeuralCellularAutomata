@@ -12,10 +12,15 @@ body {
 }
 
 .configuration {
-    margin: auto;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: small;
+    background-color: rgb(55, 56, 46);
+
+    margin: auto auto auto 1%;
     display: flex;
     align-items: center;
-    width: 50%;
+    width: 30%;
     justify-content: center;
     column-gap: 1%;
     color:#fff;
@@ -26,4 +31,16 @@ body {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
+}
+
+input[type="button"] { 
+    font-size: 1.05em;
+    background-color: rgb(229, 245, 12);
+    color: black;
+    margin: 0.8em 0 0.8em 0;
+    padding: 4px 10px;
+    display: inline-block;
+    border: double;
+    border-color: crimson;
+    border-radius: 6%;
 }
