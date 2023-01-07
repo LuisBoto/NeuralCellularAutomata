@@ -1,4 +1,4 @@
-let columnNumber = 1920, rowNumber = 1080;
+let columnNumber = window.innerWidth, rowNumber = window.innerHeight;
 let activationFunctionBody = "return x > 1 ? 1 : x < 0 ? 0 : x;";
 let loopID;
 let cellColor = hexToRgb("00f200");

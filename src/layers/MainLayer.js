@@ -33,7 +33,7 @@ class MainLayer {
 
         this.gpu.addFunction(activation);
 
-        this.updateCellMatrix = this.gpu.createKernel(function(rowNumber, columnNumber, cellMatrix, kernelValues) {
+        this.updateCellMatrix = this.gpu.createKernel(function(columnNumber, rowNumber, cellMatrix, kernelValues) {
             let x = Math.floor(this.thread.x), y = Math.floor(this.thread.y);
             let xMinusOne = x == 0 ? rowNumber-1 : x-1;
             let xPlusOne = x == rowNumber-1 ? 0 : x+1;
