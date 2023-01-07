@@ -29,7 +29,7 @@ presets.push({
     kernel: [[-0.31,  0.75,  -0.31],
              [0.75,   0.56,  0.75],
              [-0.31, 0.15, -0.31]],
-    color: "FFaa00"
+    color: "010abf"
 });
 
 function createPresetButtons() {
