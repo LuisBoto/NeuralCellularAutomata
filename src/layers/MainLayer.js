@@ -29,7 +29,7 @@ class MainLayer {
     }
 
     generateUpdateAndDrawKernels() {
-        this.gpu = new GPU({ canvas, context: gl });
+        this.gpu = new GPUX({ canvas, context: gl });
 
         this.gpu.addFunction(activation);
 
