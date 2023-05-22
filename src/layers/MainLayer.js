@@ -59,6 +59,21 @@ class MainLayer {
             cellValue > 0.1 ? this.color(r*cellValue, g*cellValue, b*cellValue, 1) : this.color(0,0,0);
         }).setOutput([columnNumber, rowNumber])
           .setGraphical(true);
+
+        this.fillCellArea = this.gpu.createKernel(function(columnNumber, rowNumber, cellMatrix, x, y) {
+            let cellValue = cellMatrix[this.thread.y][this.thread.x];
+            if (Math.abs(this.thread.x - x) < 10 && Math.abs(rowNumber - this.thread.y - y) < 10)
+                return 1.0;
+            return cellValue;
+        }).setOutput([columnNumber, rowNumber])
+    }
+
+    handleTouch(ongoingTouches) {
+        ongoingTouches
+            .map(t => { let coord = { X: t.clientX, Y: t.clientY }; return coord; })
+            .forEach(coord => {
+                this.cells = this.fillCellArea(columnNumber, rowNumber, this.cells, coord.X, coord.Y);
+            });
     }
 }
 
