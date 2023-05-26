@@ -16,7 +16,13 @@ function hexToRgb(hex) {
 }
 
 function updateActivation() {
-    eval( "function activation(x) { " + activationFunctionBody + " }" )
+    try {
+        eval( "function activation(x) { " + activationFunctionBody + " }" )
+        for (let i = -5; i <= 5; i++) activation(i); // Try for runtime errors
+    } catch (err) {
+        console.log(err);
+        return;
+    }
     window["activation"] = activation;
 };
 
