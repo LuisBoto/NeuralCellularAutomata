@@ -63,7 +63,7 @@ class MainLayer {
         this.fillCellArea = this.gpu.createKernel(function(columnNumber, rowNumber, cellMatrix, x, y) {
             let cellValue = cellMatrix[this.thread.y][this.thread.x];
             if (Math.abs(this.thread.x - x) < 10 && Math.abs(rowNumber - this.thread.y - y) < 10)
-                return 1.0;
+                return Math.random() > 0.5 ? 1 : 0;
             return cellValue;
         }, { immutable: true })
         .setOutput([columnNumber, rowNumber])
